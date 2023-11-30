@@ -43,7 +43,8 @@ type Languages =
   | "Italian"
   | "Japanese"
   | "Norwegian"
-  | "Polish";
+  | "Polish"
+  | "Spanish";
 
 type Tag =
   | "Indie"
