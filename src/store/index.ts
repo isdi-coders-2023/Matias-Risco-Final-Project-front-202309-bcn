@@ -1,7 +1,17 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  combineReducers,
+} from "@reduxjs/toolkit";
+import gameReducer from "./feature/games/GamesSlice";
+
+export const rootReducer = combineReducers({
+  gameState: gameReducer,
+});
 
 export const store = configureStore({
-  reducer: {},
+  reducer: rootReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
