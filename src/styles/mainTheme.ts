@@ -5,8 +5,9 @@ const mainTheme: DefaultTheme = {
     background: "#131D2C",
     containerBackground: "#213955",
     mainFont: "#fff",
-    secondaryFont: "#D9",
+    secondaryFont: "#D9D9D9",
     backgroundHeader: "#F74843",
+    backgroundNavigation: "#D9D9D9",
   },
   typography: {
     mainFontFamily: "'Roboto', sans-serif",
