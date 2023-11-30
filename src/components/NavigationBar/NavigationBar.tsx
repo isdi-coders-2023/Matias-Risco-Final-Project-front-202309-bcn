@@ -1,6 +1,8 @@
+import NavigationBarStyled from "./NavigationBarStyled";
+
 const NavigationBar = (): React.ReactElement => (
-  <nav>
-    <button>
+  <NavigationBarStyled>
+    <button className="button-icon">
       <img
         src=".\images\icon-home.webp"
         alt="icon of a home"
@@ -9,7 +11,7 @@ const NavigationBar = (): React.ReactElement => (
       />
       <h3>Home</h3>
     </button>
-    <button>
+    <button className="button-icon">
       <img
         src=".\images\icon-user.webp"
         alt="icon of a user"
@@ -18,7 +20,7 @@ const NavigationBar = (): React.ReactElement => (
       />
       <h3>Login</h3>
     </button>
-    <button>
+    <button className="button-icon">
       <img
         src=".\images\icon-plus.webp"
         alt="icon of a plus"
@@ -27,7 +29,7 @@ const NavigationBar = (): React.ReactElement => (
       />
       <h3>Add</h3>
     </button>
-  </nav>
+  </NavigationBarStyled>
 );
 
 export default NavigationBar;
