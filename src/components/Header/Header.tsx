@@ -1,5 +1,7 @@
+import HeaderStyled from "./HeaderStyled";
+
 const Header = (): React.ReactElement => (
-  <header>
+  <HeaderStyled>
     <img
       src="./images/valveLogo.svg"
       alt="logo of valve"
@@ -7,7 +9,7 @@ const Header = (): React.ReactElement => (
       height="88.77"
       className="title-logo"
     />
-  </header>
+  </HeaderStyled>
 );
 
 export default Header;
