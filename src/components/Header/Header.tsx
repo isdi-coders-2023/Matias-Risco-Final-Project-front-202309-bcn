@@ -1,12 +1,12 @@
 import HeaderStyled from "./HeaderStyled";
 
 const Header = (): React.ReactElement => (
-  <HeaderStyled>
+  <HeaderStyled title="valve Pipe">
     <img
-      src="./images/valveLogo.svg"
+      src="images\valveLogo.svg"
       alt="logo of valve"
       width="320"
-      height="88.77"
+      height="89"
       className="title-logo"
     />
   </HeaderStyled>
