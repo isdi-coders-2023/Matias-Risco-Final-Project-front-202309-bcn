@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@fontsource/roboto";
 import { ThemeProvider } from "styled-components";
+import "@fontsource/roboto/400.css";
 import mainTheme from "./styles/mainTheme";
 import GlobalsStyled from "./styles/GlobalsStyled";
 import App from "./components/App/App";

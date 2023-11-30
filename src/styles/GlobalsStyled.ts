@@ -23,6 +23,8 @@ button{
   border: 0;
   cursor: pointer;
   box-shadow: none;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 ul{
