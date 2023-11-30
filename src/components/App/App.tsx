@@ -6,12 +6,10 @@ import HomePage from "../../pages/HomePage/HomePage";
 const App = (): React.ReactElement => (
   <div>
     <Header />
-    <main>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
-    </main>
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/home" element={<HomePage />} />
+    </Routes>
     <NavigationBar />
   </div>
 );
