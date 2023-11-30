@@ -5,7 +5,7 @@ const HomePageStyled = styled.main`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding: 15px 0;
+  padding: 15px 0 104px;
 
   h1 {
     width: 150px;
