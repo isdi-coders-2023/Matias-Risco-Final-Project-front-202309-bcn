@@ -6,6 +6,7 @@ const mainTheme: DefaultTheme = {
     containerBackground: "#213955",
     mainFont: "#fff",
     secondaryFont: "#D9",
+    backgroundHeader: "#F74843",
   },
   typography: {
     mainFontFamily: "'Roboto', sans-serif",

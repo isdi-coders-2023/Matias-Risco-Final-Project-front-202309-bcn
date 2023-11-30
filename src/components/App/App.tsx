@@ -1,12 +1,9 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import Header from "../Header/Header";
 
 const App = (): React.ReactElement => (
   <div>
-    <main>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-      </Routes>
-    </main>
+    <Header />
+    <main></main>
   </div>
 );
 
