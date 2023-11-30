@@ -4,11 +4,11 @@ import { ThemeProvider } from "styled-components";
 import mainTheme from "../styles/mainTheme";
 import GlobalsStyled from "../styles/GlobalsStyled";
 
-interface ActivateCustumazerStructure {
+export interface ActivateCustumazerStructure {
   isMemoryRouter?: boolean;
 }
 
-interface InitialPropsStructure {
+export interface InitialPropsStructure {
   initialPath?: string;
 }
 
@@ -35,15 +35,12 @@ const customRender = (
     </ThemeProvider>
   );
 
-  const setMemoryRouter: React.ReactElement = isMemoryRouter ? (
-    <MemoryRouter
-      initialEntries={[initialPath ?? initialPropsDummy.initialPath!]}
-    >
-      {base}
-    </MemoryRouter>
-  ) : (
-    base
-  );
+  const setMemoryRouter: React.ReactElement =
+    isMemoryRouter ?? ActivateCustumazerDummy.isMemoryRouter ? (
+      <MemoryRouter initialEntries={[initialPath!]}>{base}</MemoryRouter>
+    ) : (
+      base
+    );
 
   return render(setMemoryRouter);
 };
