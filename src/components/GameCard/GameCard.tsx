@@ -25,18 +25,18 @@ const GameCard = ({
         height="131"
       />
       <div className="game-card__description-container">
-        <span className="game-card__description">
-          <div>Plataforms: </div>
-          <div>{PropetiesToShortDescription(plataforms)}</div>
-        </span>
-        <span className="game-card__description">
-          <div>Difficulty: </div>
-          <div>{difficulty}</div>
-        </span>
-        <span className="game-card__description">
-          <div>Languages: &nbsp;</div>
-          <div>{PropetiesToShortDescription(languages)}</div>
-        </span>
+        <div className="game-card__description">
+          <span>Plataforms: </span>
+          <span>{PropetiesToShortDescription(plataforms)}</span>
+        </div>
+        <div className="game-card__description">
+          <span>Difficulty: </span>
+          <span>{difficulty}</span>
+        </div>
+        <div className="game-card__description">
+          <span>Languages: &nbsp;</span>
+          <span>{PropetiesToShortDescription(languages)}</span>
+        </div>
       </div>
     </GameCardStyled>
   );

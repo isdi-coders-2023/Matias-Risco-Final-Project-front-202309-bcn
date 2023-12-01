@@ -5,7 +5,7 @@ import GameCard from "./GameCard";
 
 describe("Given the component GameCard", () => {
   describe("When UserCard it is render with the information of ultrakill", () => {
-    test("the user should see the heading of ULTRAKILL", () => {
+    test("the user should see the heading of Ultrakill", () => {
       const ultrakill = gamesMock[0];
       const tag = "heading";
       const expectedText = ultrakill.name;
