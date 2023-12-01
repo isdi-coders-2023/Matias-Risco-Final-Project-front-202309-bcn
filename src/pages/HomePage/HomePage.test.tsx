@@ -13,7 +13,7 @@ describe("Given the component HomePage", () => {
       const expetedText = "Games";
       const tag = "heading";
 
-      customRender(<HomePage />, { isProvider: true });
+      customRender(<HomePage />, { isProvider: true, isMemoryRouter: true });
 
       const headingElement = screen.getByRole(tag, { name: expetedText });
 
@@ -29,7 +29,7 @@ describe("Given the component HomePage", () => {
 
       customRender(
         <HomePage />,
-        { isProvider: true },
+        { isProvider: true, isMemoryRouter: true },
         { preloadedState: { gameState: { games: gamesData } } },
       );
 
@@ -59,7 +59,7 @@ describe("Given the component HomePage", () => {
           Dispatch<AnyAction>,
       );
 
-      customRender(<HomePage />, { isProvider: true });
+      customRender(<HomePage />, { isProvider: true, isMemoryRouter: true });
 
       expect(dispatch).toHaveBeenCalledWith(
         expect.objectContaining({ payload: gamesData }),

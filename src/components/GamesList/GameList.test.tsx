@@ -12,7 +12,7 @@ describe("Given the component GameCard", () => {
 
       customRender(
         <GamesList />,
-        { isProvider: true },
+        { isProvider: true, isMemoryRouter: true },
         { preloadedState: { gameState: { games: gamesMock } } },
       );
 
