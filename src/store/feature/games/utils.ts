@@ -1,7 +1,7 @@
 import { GameStructure } from "./types";
 
 export const copyGame = ({
-  plataforms,
+  platforms: plataforms,
   audience,
   languages,
   tags,
@@ -11,7 +11,7 @@ export const copyGame = ({
   tags: [...tags],
   languages: [...languages],
   audience: [...audience],
-  plataforms: [...plataforms],
+  platforms: [...plataforms],
 });
 
 export const copyGames = (games: GameStructure[]) =>

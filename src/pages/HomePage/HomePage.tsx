@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
 import { loadGamesActionCreator } from "../../store/feature/games/GamesSlice";
 import gamesMock from "../../mocks/gamesMockData";
+import GamesList from "../../components/GamesList/GamesList";
 
 const HomePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ const HomePage = (): React.ReactElement => {
   return (
     <HomePageStyled>
       <h1>Games</h1>
+      <GamesList />
     </HomePageStyled>
   );
 };

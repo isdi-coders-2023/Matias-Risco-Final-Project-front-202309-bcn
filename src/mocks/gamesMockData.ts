@@ -8,10 +8,10 @@ const gamesMock: GameStructure[] = [
     graphics: "Don't look too long at it",
     grind: "Only if u care about leaderboards/ranks",
     id: "eqwfewqfweqfwqefweq",
-    imageUrl: "fgewqfacdesvafscwde",
+    imageUrl: "https://i.ibb.co/PWKB6yW/ULTRAKILL.jpg",
     languages: ["Danish", "English", "Russian", "Spanish"],
     name: "Ultrakill",
-    plataforms: ["Windows", "VR"],
+    platforms: ["Windows", "VR"],
     tags: ["3D", "Action", "Gore", "Shooter"],
   },
   {
@@ -21,10 +21,11 @@ const gamesMock: GameStructure[] = [
     graphics: "Decent",
     grind: "You'll need a second life for grinding",
     id: "324ftrwesfrgoiw34t",
-    imageUrl: "fgewqfacdesvafscwde",
+    imageUrl:
+      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
     languages: ["Danish", "English", "Russian", "Spanish"],
     name: "Cady Crush",
-    plataforms: ["Windows", "VR"],
+    platforms: ["Windows", "VR"],
     tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
   },
 ];

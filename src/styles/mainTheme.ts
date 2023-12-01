@@ -11,7 +11,7 @@ const mainTheme: DefaultTheme = {
   },
   typography: {
     mainFontFamily: "'Roboto', sans-serif",
-    propetySize: "1.3 rem",
+    propetySize: "1.3rem",
     titleSize: "2rem",
   },
 };
