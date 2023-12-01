@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
 import { loadGamesActionCreator } from "../../store/feature/games/GamesSlice";
-import gamesMock from "../../mocks/gamesMockData";
 import GamesList from "../../components/GamesList/GamesList";
+import gamesData from "../../data/gamesData";
 
 const HomePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadGamesActionCreator(gamesMock));
+    dispatch(loadGamesActionCreator(gamesData));
   }, [dispatch]);
 
   return (

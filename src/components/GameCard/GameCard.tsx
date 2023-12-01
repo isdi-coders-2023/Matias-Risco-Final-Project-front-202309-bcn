@@ -8,7 +8,7 @@ interface GameCardParamsStructure {
 
 const PropetiesToShortDescription = (propeties: string[]): string =>
   propeties.length > 2
-    ? `${propeties[0]}, ${propeties[1]}, ${propeties.length} more...`
+    ? `${propeties[0]}, ${propeties[1]}, ${propeties.length - 2} more...`
     : propeties.join(", ");
 
 const GameCard = ({
