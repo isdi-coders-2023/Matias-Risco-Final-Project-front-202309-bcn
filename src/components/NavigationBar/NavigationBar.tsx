@@ -7,7 +7,7 @@ const NavigationBar = (): React.ReactElement => (
       <li>
         <NavLink className="button-icon" to="/home">
           <img
-            src="images/icon-home.webp"
+            src="public/images/icon-home.svg"
             alt="button"
             width="48"
             height="48"
@@ -18,7 +18,7 @@ const NavigationBar = (): React.ReactElement => (
       <li>
         <NavLink className="button-icon" to="/login">
           <img
-            src="images/icon-user.webp"
+            src="public/images/icon-user.svg"
             alt="button"
             width="48"
             height="48"
@@ -29,7 +29,7 @@ const NavigationBar = (): React.ReactElement => (
       <li>
         <NavLink className="button-icon" to="/add">
           <img
-            src="images/icon-plus.webp"
+            src="public/images/icon-plus.svg"
             alt="button"
             width="48"
             height="48"

@@ -9,6 +9,7 @@ declare module "styled-components" {
       containerBackground: string;
       mainFont: string;
       secondaryFont: string;
+      navigationFont: string;
     };
     typography: {
       mainFontFamily: string;
