@@ -10,7 +10,10 @@ const gamesSlice = createSlice({
   name: "gameState",
   initialState: initialGamesState,
   reducers: {
-    loadGames: (currentState, action: PayloadAction<GameStructure[]>) => ({
+    loadGames: (
+      currentState,
+      action: PayloadAction<GameStructure[]>,
+    ): GameStateStructure => ({
       ...currentState,
       games: copyGames(action.payload),
     }),
