@@ -8,7 +8,11 @@ describe("Given the component App", () => {
       const headingTag = "heading";
       const homeHeadingText = "Games";
 
-      customRender(<App />, { isMemoryRouter: true }, { initialPath: "" });
+      customRender(
+        <App />,
+        { isMemoryRouter: true, isProvider: true },
+        { initialPath: "" },
+      );
 
       const headingElement = screen.getByRole(headingTag, {
         name: homeHeadingText,

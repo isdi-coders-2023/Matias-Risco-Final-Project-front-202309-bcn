@@ -84,12 +84,12 @@ type Tag =
   | "Horror"
   | "Gore";
 
-type Plataforms = "VR" | "Windows" | "Linux" | "Mac";
+type Platforms = "VR" | "Windows" | "Linux" | "Mac";
 
 export interface GameStructure {
   id: string;
   name: string;
-  plataforms: Plataforms[];
+  platforms: Platforms[];
   difficulty: Difficulty;
   imageUrl: string;
   languages: Languages[];

@@ -5,6 +5,7 @@ const HeaderStyled = styled.header`
   align-items: center;
   background-color: ${({ theme }) => theme.color.backgroundHeader};
   justify-content: center;
+  width: 100%;
 
   .title-logo {
     width: 100%;
