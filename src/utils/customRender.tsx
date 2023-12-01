@@ -52,7 +52,11 @@ const customRender = (
 
   const setMemoryRouter: React.ReactElement =
     isMemoryRouter ?? ActivateCustumazerDefault.isMemoryRouter ? (
-      <MemoryRouter initialEntries={[initialPath!]}>{setProvide}</MemoryRouter>
+      <MemoryRouter
+        initialEntries={[initialPath ?? initialPropsDefault.initialPath!]}
+      >
+        {setProvide}
+      </MemoryRouter>
     ) : (
       setProvide
     );

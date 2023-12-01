@@ -15,8 +15,8 @@ const NavigationBarStyled = styled.nav`
   }
 
   .button-icon {
-    width: 48px;
-    height: 73.34px;
+    width: 84px;
+    height: 77px;
     display: flex;
     flex-direction: column;
     gap: 6px;

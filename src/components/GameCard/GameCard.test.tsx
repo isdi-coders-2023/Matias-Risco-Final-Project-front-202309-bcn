@@ -10,7 +10,7 @@ describe("Given the component GameCard", () => {
       const tag = "heading";
       const expectedText = ultrakill.name;
 
-      customRender(<GameCard game={ultrakill} />);
+      customRender(<GameCard game={ultrakill} />, { isMemoryRouter: true });
 
       const headingElement = screen.getByRole(tag, {
         name: expectedText,

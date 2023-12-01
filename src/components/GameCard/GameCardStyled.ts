@@ -26,6 +26,26 @@ const GameCardStyled = styled.section`
       align-items: start;
       font-size: ${({ theme }) => theme.typography.propetySize};
     }
+
+    &__button {
+      width: 84px;
+      height: 77px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      text-decoration: none;
+      color: ${({ theme }) => theme.color.backgroundNavigation};
+      font-size: ${({ theme }) => theme.typography.propetySize};
+      font-weight: inherit;
+
+      &-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
   }
 `;
 

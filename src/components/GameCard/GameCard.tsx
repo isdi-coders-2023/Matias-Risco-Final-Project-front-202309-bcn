@@ -1,6 +1,8 @@
 import React from "react";
 import { GameStructure } from "../../store/feature/games/types";
 import GameCardStyled from "./GameCardStyled";
+import Button from "../Button/Button";
+import { NavLink } from "react-router-dom";
 
 interface GameCardParamsStructure {
   game: GameStructure;
@@ -12,7 +14,7 @@ const PropetiesToShortDescription = (propeties: string[]): string =>
     : propeties.join(", ");
 
 const GameCard = ({
-  game: { name, platforms: plataforms, difficulty, languages, imageUrl },
+  game: { name, platforms: plataforms, difficulty, languages, imageUrl, id },
 }: GameCardParamsStructure): React.ReactElement => {
   return (
     <GameCardStyled className="game-card">
@@ -37,6 +39,25 @@ const GameCard = ({
           <span>Languages: &nbsp;</span>
           <span>{PropetiesToShortDescription(languages)}</span>
         </div>
+      </div>
+      <div className="game-card__button-container">
+        <NavLink to={`games/info/${id}`} className="game-card__button">
+          <img src="images/icon-info.svg" alt="button" width="48" height="48" />
+          Info
+        </NavLink>
+        <NavLink to={`games/edit/${id}`} className="game-card__button">
+          <img src="images/icon-edit.svg" alt="button" width="48" height="48" />
+          Edit
+        </NavLink>
+        <Button className="game-card__button">
+          <img
+            src="images/icon-trash.svg"
+            alt="button"
+            width="48"
+            height="48"
+          />
+          Eliminate
+        </Button>
       </div>
     </GameCardStyled>
   );
