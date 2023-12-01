@@ -1,14 +1,15 @@
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
+import GamesListStyled from "./GamesListStyled";
 
 const GamesList = (): React.ReactElement => {
   const { games } = useAppSelector(({ gameState }) => gameState);
   return (
-    <ul>
+    <GamesListStyled>
       {games.map((game) => (
         <li key={game.id}></li>
       ))}
-    </ul>
+    </GamesListStyled>
   );
 };
 
