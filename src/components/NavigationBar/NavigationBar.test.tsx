@@ -4,20 +4,20 @@ import NavigationBar from "./NavigationBar";
 
 describe("Given the component NavigationBar", () => {
   describe("When it is render", () => {
-    test("Then it should display by screnn button Home, Login and Add", () => {
-      const buttonTag = "button";
-      const homeButtonText = "button Home";
-      const loginButtonText = "button Login";
-      const addButtonText = "button Add";
+    test("Then it should display by screnn link Home, Login and Add", () => {
+      const linkTag = "link";
+      const homeButtonText = "link Home";
+      const loginButtonText = "link Login";
+      const addButtonText = "link Add";
 
-      customRender(<NavigationBar />);
-      const homeButtonElement = screen.getByRole(buttonTag, {
+      customRender(<NavigationBar />, { isMemoryRouter: true });
+      const homeButtonElement = screen.getByRole(linkTag, {
         name: homeButtonText,
       });
-      const loginButtonElement = screen.getByRole(buttonTag, {
+      const loginButtonElement = screen.getByRole(linkTag, {
         name: loginButtonText,
       });
-      const addButtonElement = screen.getByRole(buttonTag, {
+      const addButtonElement = screen.getByRole(linkTag, {
         name: addButtonText,
       });
 

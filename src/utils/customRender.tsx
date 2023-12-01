@@ -23,18 +23,18 @@ const customRender = (
   activateCustumazer?: ActivateCustumazerStructure,
   initialProps?: InitialPropsStructure,
 ) => {
-  const initialPropsDummy: InitialPropsStructure = {
+  const initialPropsDefault: InitialPropsStructure = {
     initialPath: "",
     preloadedState: {},
   };
-  const ActivateCustumazerDummy: ActivateCustumazerStructure = {
+  const ActivateCustumazerDefault: ActivateCustumazerStructure = {
     isMemoryRouter: false,
     isProvider: false,
   };
 
   const { isMemoryRouter, isProvider } =
-    activateCustumazer ?? ActivateCustumazerDummy;
-  const { initialPath, preloadedState } = initialProps ?? initialPropsDummy;
+    activateCustumazer ?? ActivateCustumazerDefault;
+  const { initialPath, preloadedState } = initialProps ?? initialPropsDefault;
 
   const base = (
     <ThemeProvider theme={mainTheme}>
@@ -51,7 +51,7 @@ const customRender = (
   );
 
   const setMemoryRouter: React.ReactElement =
-    isMemoryRouter ?? ActivateCustumazerDummy.isMemoryRouter ? (
+    isMemoryRouter ?? ActivateCustumazerDefault.isMemoryRouter ? (
       <MemoryRouter initialEntries={[initialPath!]}>{setProvide}</MemoryRouter>
     ) : (
       setProvide
