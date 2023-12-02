@@ -9,7 +9,7 @@ const HeaderStyled = styled.header`
 
   .title-logo {
     width: 100%;
-    height: 27.740625vw;
+    height: 27vw;
     max-width: 502px;
     max-height: 140px;
     background-color: ${({ theme }) => theme.color.mainFont};
