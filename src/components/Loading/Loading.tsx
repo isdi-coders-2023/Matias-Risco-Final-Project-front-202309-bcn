@@ -10,7 +10,7 @@ const Loading = (): React.ReactElement => (
         width="250"
         height="250"
       />
-      <h2>Loading ...</h2>
+      <h2>Loading...</h2>
     </LoadingStyled>
   </>
 );
