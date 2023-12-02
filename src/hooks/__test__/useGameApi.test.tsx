@@ -2,6 +2,9 @@ import { renderHook } from "@testing-library/react";
 import { copyGames } from "../../store/feature/games/utils";
 import gamesMock from "../../mocks/gamesMockData";
 import useGameApi from "../useGameApi";
+import { PropsWithChildren } from "react";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 describe("Given the hook useGameApi", () => {
   describe("When getGamesApi is call", () => {
@@ -12,7 +15,11 @@ describe("Given the hook useGameApi", () => {
         result: {
           current: { getGamesApi },
         },
-      } = renderHook(useGameApi);
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      });
 
       const actualGames = await getGamesApi();
 

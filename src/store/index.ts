@@ -5,9 +5,11 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import gameReducer from "./feature/games/GamesSlice";
+import uiReducer from "./feature/ui/UiSlice";
 
 export const rootReducer = combineReducers({
   gameState: gameReducer,
+  uiState: uiReducer,
 });
 
 export const store = configureStore({
