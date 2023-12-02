@@ -17,7 +17,7 @@ const HomePage = (): React.ReactElement => {
         const gamesData = await getGamesApi();
         dispatch(loadGamesActionCreator(gamesData));
       } catch (error) {
-        toast.error("Error in loading page");
+        await toast.error("Error in loading page");
       }
     })();
   }, [dispatch, getGamesApi]);
