@@ -3,14 +3,18 @@ import { useAppDispatch } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
 import { loadGamesActionCreator } from "../../store/feature/games/GamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
-import gamesData from "../../data/gamesData";
+import useGameApi from "../../hooks/useGameApi";
 
 const HomePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
+  const { getGamesApi } = useGameApi();
 
   useEffect(() => {
-    dispatch(loadGamesActionCreator(gamesData));
-  }, [dispatch]);
+    (async () => {
+      const gamesData = await getGamesApi();
+      dispatch(loadGamesActionCreator(gamesData));
+    })();
+  }, [dispatch, getGamesApi]);
 
   return (
     <HomePageStyled>
