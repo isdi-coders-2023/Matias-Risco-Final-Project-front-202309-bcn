@@ -6,6 +6,8 @@ jobs:
   test:
     name: Tests passes
     runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{secrets.VITE_API_URL}})
 
     steps:
       - name: ⬇ Git checkout
