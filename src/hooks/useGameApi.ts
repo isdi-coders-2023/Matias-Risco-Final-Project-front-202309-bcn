@@ -12,13 +12,19 @@ const useGameApi = () => {
   const getGamesApi = useCallback(async (): Promise<GameStructure[]> => {
     dispatch(toggleLoadingActionCreator());
 
-    const {
-      data: { games },
-    } = await axios.get<{ games: GameStructure[] }>("/games");
+    try {
+      const {
+        data: { games },
+      } = await axios.get<{ games: GameStructure[] }>("/games");
 
-    dispatch(toggleLoadingActionCreator());
+      dispatch(toggleLoadingActionCreator());
 
-    return games;
+      return games;
+    } catch (error) {
+      dispatch(toggleLoadingActionCreator());
+
+      throw new Error((error as Error).message);
+    }
   }, [dispatch]);
 
   return { getGamesApi };
