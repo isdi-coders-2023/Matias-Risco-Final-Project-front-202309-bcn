@@ -17,4 +17,4 @@ const uiSlice = createSlice({
 });
 
 export default uiSlice.reducer;
-export const { toggleLoading } = uiSlice.actions;
+export const { toggleLoading: toggleLoadingActionCreator } = uiSlice.actions;
