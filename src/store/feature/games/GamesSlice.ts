@@ -17,8 +17,21 @@ const gamesSlice = createSlice({
       ...currentState,
       games: copyGames(action.payload),
     }),
+
+    deleteGame: (
+      currentState,
+      action: PayloadAction<string>,
+    ): GameStateStructure => ({
+      ...currentState,
+      games: copyGames(
+        currentState.games.filter(({ id }) => id !== action.payload),
+      ),
+    }),
   },
 });
 
 export default gamesSlice.reducer;
-export const { loadGames: loadGamesActionCreator } = gamesSlice.actions;
+export const {
+  loadGames: loadGamesActionCreator,
+  deleteGame: deleteGameActionCreator,
+} = gamesSlice.actions;
