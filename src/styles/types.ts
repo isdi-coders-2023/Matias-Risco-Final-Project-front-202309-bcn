@@ -10,6 +10,7 @@ declare module "styled-components" {
       mainFont: string;
       secondaryFont: string;
       navigationFont: string;
+      buttonText: string;
     };
     typography: {
       mainFontFamily: string;

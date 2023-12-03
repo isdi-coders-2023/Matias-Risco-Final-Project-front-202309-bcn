@@ -16,6 +16,9 @@ body{
   margin: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 button{
