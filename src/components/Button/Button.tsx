@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import ButtonStyled from "./ButtonStyled";
 
 interface ButtonParamertsStructure {
   className?: string;
@@ -10,9 +11,9 @@ const Button = ({
   className,
   onClick,
 }: PropsWithChildren<ButtonParamertsStructure>) => (
-  <button className={className} onClick={onClick}>
+  <ButtonStyled className={`button ${className}`} onClick={onClick}>
     {children}
-  </button>
+  </ButtonStyled>
 );
 
 export default Button;

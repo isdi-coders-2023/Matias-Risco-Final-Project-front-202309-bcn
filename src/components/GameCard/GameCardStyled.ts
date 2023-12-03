@@ -44,6 +44,7 @@ const GameCardStyled = styled.section`
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
+        color: ${({ theme }) => theme.color.backgroundNavigation};
       }
     }
   }

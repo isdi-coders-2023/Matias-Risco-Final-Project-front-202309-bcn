@@ -49,7 +49,7 @@ const GameCard = ({
           <img src="images/icon-edit.svg" alt="button" width="48" height="48" />
           Edit
         </NavLink>
-        <Button className="game-card__button">
+        <Button className="button--icon">
           <img
             src="images/icon-trash.svg"
             alt="button"

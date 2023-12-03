@@ -9,6 +9,7 @@ const mainTheme: DefaultTheme = {
     backgroundHeader: "#F74843",
     backgroundNavigation: "#D9D9D9",
     navigationFont: "#222",
+    buttonText: "#00BBFF",
   },
   typography: {
     mainFontFamily: "'Roboto', sans-serif",
