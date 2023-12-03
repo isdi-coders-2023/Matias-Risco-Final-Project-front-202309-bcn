@@ -6,7 +6,7 @@ const NotFoundPage = (): React.ReactElement => (
   <NotFoundPageStyled>
     <h1>Error</h1>
     <div className="error-container">
-      <h3>Page not Found</h3>
+      <h2>Page not Found</h2>
 
       <p>Please go to homepage</p>
 
