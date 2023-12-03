@@ -6,4 +6,8 @@ export const handlersError = [
   http.get(`${urlApi}/games`, () => {
     return HttpResponse.error();
   }),
+
+  http.delete(`${urlApi}/games/delete/:idGame`, () => {
+    return HttpResponse.error();
+  }),
 ];
