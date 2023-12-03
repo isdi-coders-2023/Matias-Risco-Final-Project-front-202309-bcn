@@ -5,6 +5,8 @@ import Button from "../Button/Button";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { deleteGameActionCreator } from "../../store/feature/games/GamesSlice";
+import useGameApi from "../../hooks/useGameApi";
+import { ToastContainer, toast } from "react-toastify";
 
 interface GameCardParamsStructure {
   game: GameStructure;
@@ -19,10 +21,16 @@ const GameCard = ({
   game: { name, platforms: plataforms, difficulty, languages, imageUrl, id },
 }: GameCardParamsStructure): React.ReactElement => {
   const dispatch = useAppDispatch();
+  const { deleteGameApi } = useGameApi();
 
-  const deleteAction = useCallback(() => {
-    dispatch(deleteGameActionCreator(id));
-  }, [dispatch, id]);
+  const deleteAction = useCallback(async () => {
+    try {
+      await deleteGameApi(id);
+      dispatch(deleteGameActionCreator(id));
+    } catch {
+      await toast.error("Error in delete game");
+    }
+  }, [deleteGameApi, dispatch, id]);
 
   return (
     <GameCardStyled className="game-card">
@@ -67,6 +75,17 @@ const GameCard = ({
           Eliminate
         </Button>
       </div>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="colored"
+      />
     </GameCardStyled>
   );
 };

@@ -27,7 +27,24 @@ const useGameApi = () => {
     }
   }, [dispatch]);
 
-  return { getGamesApi };
+  const deleteGameApi = useCallback(
+    async (id: string): Promise<GameStructure> => {
+      dispatch(toggleLoadingActionCreator());
+      try {
+        const {
+          data: { game },
+        } = await axios.delete<{ game: GameStructure }>(`/games/delete/${id}`);
+        dispatch(toggleLoadingActionCreator());
+        return game;
+      } catch {
+        dispatch(toggleLoadingActionCreator());
+        throw new Error("game not found");
+      }
+    },
+    [dispatch],
+  );
+
+  return { getGamesApi, deleteGameApi };
 };
 
 export default useGameApi;
