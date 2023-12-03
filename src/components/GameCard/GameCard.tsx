@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { GameStructure } from "../../store/feature/games/types";
 import GameCardStyled from "./GameCardStyled";
 import Button from "../Button/Button";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { deleteGameActionCreator } from "../../store/feature/games/GamesSlice";
 
 interface GameCardParamsStructure {
   game: GameStructure;
@@ -16,6 +18,12 @@ const PropetiesToShortDescription = (propeties: string[]): string =>
 const GameCard = ({
   game: { name, platforms: plataforms, difficulty, languages, imageUrl, id },
 }: GameCardParamsStructure): React.ReactElement => {
+  const dispatch = useAppDispatch();
+
+  const deleteAction = useCallback(() => {
+    dispatch(deleteGameActionCreator(id));
+  }, [dispatch, id]);
+
   return (
     <GameCardStyled className="game-card">
       <h2 className="game-card__name">{name}</h2>
@@ -49,7 +57,7 @@ const GameCard = ({
           <img src="images/icon-edit.svg" alt="button" width="48" height="48" />
           Edit
         </NavLink>
-        <Button className="button--icon">
+        <Button className="button--icon" onClick={deleteAction}>
           <img
             src="images/icon-trash.svg"
             alt="button"
