@@ -17,7 +17,7 @@ const NavigationBar = (): React.ReactElement => (
         </NavLink>
       </li>
       <li>
-        <NavLink className="button-icon" to="/add">
+        <NavLink className="button-icon" to="game/add">
           <img src="images/icon-plus.svg" alt="link" width="48" height="48" />
           Add
         </NavLink>
