@@ -7,10 +7,12 @@ import { PreloadedState } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { setupStore } from "./setUpStore";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 export interface ActivateCustumazerStructure {
   isMemoryRouter?: boolean;
   isProvider?: boolean;
+  isToastify?: boolean;
 }
 
 export interface InitialPropsStructure {
@@ -30,9 +32,10 @@ const customRender = (
   const ActivateCustumazerDefault: ActivateCustumazerStructure = {
     isMemoryRouter: false,
     isProvider: false,
+    isToastify: false,
   };
 
-  const { isMemoryRouter, isProvider } =
+  const { isMemoryRouter, isProvider, isToastify } =
     activateCustumazer ?? ActivateCustumazerDefault;
   const { initialPath, preloadedState } = initialProps ?? initialPropsDefault;
 
@@ -40,6 +43,7 @@ const customRender = (
     <ThemeProvider theme={mainTheme}>
       {" "}
       <GlobalsStyled />
+      {isToastify && <ToastContainer />}
       {children}
     </ThemeProvider>
   );

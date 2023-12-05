@@ -6,6 +6,7 @@ import { useAppSelector } from "../../store/hooks";
 import Loading from "../Loading/Loading";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import AddGamePage from "../../pages/AddGamePage/AddGamePage";
+import { ToastContainer } from "react-toastify";
 
 const App = (): React.ReactElement => {
   const { isLoading } = useAppSelector(({ uiState }) => uiState);
@@ -20,6 +21,17 @@ const App = (): React.ReactElement => {
       </Routes>
       <NavigationBar />
       {isLoading && <Loading />}
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };

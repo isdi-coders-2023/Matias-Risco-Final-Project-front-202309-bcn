@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { deleteGameActionCreator } from "../../store/feature/games/GamesSlice";
 import useGameApi from "../../hooks/useGameApi";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 interface GameCardParamsStructure {
   game: GameStructure;
@@ -27,6 +27,7 @@ const GameCard = ({
     try {
       await deleteGameApi(id);
       dispatch(deleteGameActionCreator(id));
+      await toast.success("Succes in delete game");
     } catch {
       await toast.error("Error in delete game");
     }
@@ -75,17 +76,6 @@ const GameCard = ({
           Eliminate
         </Button>
       </div>
-      <ToastContainer
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover
-        theme="colored"
-      />
     </GameCardStyled>
   );
 };
