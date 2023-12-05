@@ -30,6 +30,7 @@ describe("Given the component GameCard", () => {
     test("the user shouldn't see the heading of Ultrakill", async () => {
       const ultrakill = gamesMock[0];
       const expectedText = "Succes in delete game";
+
       customRender(<GameCard game={ultrakill} />, {
         isMemoryRouter: true,
         isProvider: true,
