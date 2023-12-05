@@ -3,7 +3,6 @@ import customRender from "../../utils/customRender";
 import HomePage from "./HomePage";
 import gamesMock from "../../mocks/gamesMockData";
 import { server } from "../../mocks/main";
-import { toast } from "react-toastify";
 import { handlersError } from "../../mocks/handlersError";
 
 describe("Given the component HomePage", () => {
@@ -47,18 +46,18 @@ describe("Given the component HomePage", () => {
 
   describe("When HomePage it is render but there is a error in loading", () => {
     test("then it should call  object toast with the method error ", async () => {
-      const expectedParameter = "Error in loading page";
-      const logSpy = vitest.spyOn(toast, "error");
+      const expectedText = "Error in loading page";
       server.use(...handlersError);
-      customRender(<HomePage />, { isProvider: true, isMemoryRouter: true });
 
-      const promise = new Promise((resolve) => {
-        setTimeout(() => resolve("done"), 50);
+      customRender(<HomePage />, {
+        isProvider: true,
+        isMemoryRouter: true,
+        isToastify: true,
       });
 
-      await promise;
-      expect(logSpy).toBeCalledWith(expectedParameter);
-      logSpy.mockClear();
+      const tostifyElement = await screen.findByText(expectedText);
+
+      expect(tostifyElement).toBeInTheDocument();
     });
   });
 });
