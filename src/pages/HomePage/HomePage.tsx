@@ -4,7 +4,7 @@ import HomePageStyled from "./HomePageStyled";
 import { loadGamesActionCreator } from "../../store/feature/games/GamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
 import useGameApi from "../../hooks/useGameApi";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = (): React.ReactElement => {
@@ -25,17 +25,6 @@ const HomePage = (): React.ReactElement => {
   return (
     <HomePageStyled>
       <h1>Games</h1>
-      <ToastContainer
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover
-        theme="colored"
-      />
       <GamesList />
     </HomePageStyled>
   );
