@@ -38,11 +38,12 @@ ul{
   margin: 0;
 }
 
-input{
+input,
+select{
+ color: ${({ theme }) => theme.color.navigationFont};
   font-family: inherit;
-  color: inherit;
-  font-weight: inherit;
-  font-size: inherit;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 body{
