@@ -5,6 +5,7 @@ import HomePage from "../../pages/HomePage/HomePage";
 import { useAppSelector } from "../../store/hooks";
 import Loading from "../Loading/Loading";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import AddGamePage from "../../pages/AddGamePage/AddGamePage";
 
 const App = (): React.ReactElement => {
   const { isLoading } = useAppSelector(({ uiState }) => uiState);
@@ -14,6 +15,7 @@ const App = (): React.ReactElement => {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/game/add" element={<AddGamePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <NavigationBar />
