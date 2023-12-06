@@ -6,19 +6,19 @@ const NavigationBar = (): React.ReactElement => (
     <ul>
       <li>
         <NavLink className="button-icon" to="/home">
-          <img src="images/icon-home.svg" alt="link" width="48" height="48" />
+          <img src="/images/icon-home.svg" alt="link" width="48" height="48" />
           Home
         </NavLink>
       </li>
       <li>
         <NavLink className="button-icon" to="/login">
-          <img src="images/icon-user.svg" alt="link" width="48" height="48" />
+          <img src="/images/icon-user.svg" alt="link" width="48" height="48" />
           Login
         </NavLink>
       </li>
       <li>
         <NavLink className="button-icon" to="game/add">
-          <img src="images/icon-plus.svg" alt="link" width="48" height="48" />
+          <img src="/images/icon-plus.svg" alt="link" width="48" height="48" />
           Add
         </NavLink>
       </li>
