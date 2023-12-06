@@ -11,9 +11,11 @@ declare module "styled-components" {
       secondaryFont: string;
       navigationFont: string;
       buttonText: string;
+      borderConteinerAprove: string;
     };
     typography: {
       mainFontFamily: string;
+      inputSize: string;
       propetySize: string;
       titleSize: string;
     };

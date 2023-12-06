@@ -43,7 +43,7 @@ select{
  color: ${({ theme }) => theme.color.navigationFont};
   font-family: inherit;
   font-weight: 500;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.typography.inputSize};
 }
 
 body{
