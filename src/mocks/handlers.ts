@@ -1,5 +1,6 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, PathParams } from "msw";
 import { mockGames } from "../setupTests";
+import { GameWithOutIdStructure } from "../store/feature/games/types";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -18,4 +19,13 @@ export const handlers = [
       return HttpResponse.json({ game });
     }
   }),
+
+  http.post<PathParams, { game: GameWithOutIdStructure }>(
+    `${urlApi}/games/add`,
+    async ({ request }) => {
+      const { game } = await request.json();
+      const id = Math.floor(Math.random() * 10000).toString();
+      return HttpResponse.json({ game: { ...game, id } });
+    },
+  ),
 ];

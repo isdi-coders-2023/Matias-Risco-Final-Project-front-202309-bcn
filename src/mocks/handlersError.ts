@@ -10,4 +10,8 @@ export const handlersError = [
   http.delete(`${urlApi}/games/delete/:idGame`, () => {
     return HttpResponse.error();
   }),
+
+  http.post(`${urlApi}/games/add`, () => {
+    return HttpResponse.error();
+  }),
 ];
