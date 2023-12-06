@@ -3,7 +3,7 @@ import LoadingStyled from "./LoadingStyled";
 const Loading = (): React.ReactElement => (
   <LoadingStyled className="loading">
     <img
-      src="images/loading.svg"
+      src="/images/loading.svg"
       alt="loading"
       className="loading__image"
       width="250"

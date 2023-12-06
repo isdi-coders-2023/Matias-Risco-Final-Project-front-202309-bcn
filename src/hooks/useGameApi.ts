@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useCallback } from "react";
-import { GameStructure } from "../store/feature/games/types";
+import {
+  GameStructure,
+  GameWithOutIdStructure,
+} from "../store/feature/games/types";
 import { useAppDispatch } from "../store/hooks";
 import { toggleLoadingActionCreator } from "../store/feature/ui/UiSlice";
 
@@ -44,7 +47,26 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  return { getGamesApi, deleteGameApi };
+  const addGameApi = useCallback(
+    async (newGame: GameWithOutIdStructure): Promise<GameStructure> => {
+      dispatch(toggleLoadingActionCreator());
+      try {
+        const {
+          data: { game },
+        } = await axios.post<{ game: GameStructure }>(`/games/add`, {
+          game: newGame,
+        });
+        dispatch(toggleLoadingActionCreator());
+        return game;
+      } catch {
+        dispatch(toggleLoadingActionCreator());
+        throw new Error("Error in adding the new game");
+      }
+    },
+    [dispatch],
+  );
+
+  return { getGamesApi, deleteGameApi, addGameApi };
 };
 
 export default useGameApi;

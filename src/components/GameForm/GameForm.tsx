@@ -52,26 +52,24 @@ const gameInputSelect = (
   titleOfInput: string,
   possibleInput: readonly string[],
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-): React.ReactElement => {
-  const titleLowerCase = titleOfInput.toLowerCase();
-  return (
-    <div className="game-form__input">
-      <label htmlFor={titleLowerCase}>{titleOfInput}: </label>
-      <select
-        name={titleLowerCase}
-        id={titleLowerCase}
-        className="input-select"
-        onChange={onChange}
-      >
-        {possibleInput.map((input) => (
-          <option key={input} value={input}>
-            {input}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-};
+  propetyName: string,
+): React.ReactElement => (
+  <div className="game-form__input">
+    <label htmlFor={propetyName}>{titleOfInput}: </label>
+    <select
+      name={propetyName}
+      id={propetyName}
+      className="input-select"
+      onChange={onChange}
+    >
+      {possibleInput.map((input) => (
+        <option key={input} value={input}>
+          {input}
+        </option>
+      ))}
+    </select>
+  </div>
+);
 
 interface GameFormParametersStructure {
   title: string;
@@ -112,7 +110,7 @@ const GameForm = ({
     if (index === -1) {
       newDetails = [...details, propetyType];
     } else {
-      [details[index], ...newDetails] = [...details];
+      [details[index], ...newDetails] = details;
     }
 
     setNewGame((newGame) => ({
@@ -130,7 +128,7 @@ const GameForm = ({
     }));
   };
 
-  const onSumbit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!actionOnSubmit) {
@@ -138,7 +136,7 @@ const GameForm = ({
     }
 
     try {
-      actionOnSubmit(newGame);
+      await actionOnSubmit(newGame);
       toast.success("Succes in Adding Game");
     } catch {
       toast.error("Error in Adding Game");
@@ -168,12 +166,12 @@ const GameForm = ({
         onChangeInputsCheckBox,
         newGame.platforms,
       )}
-      {gameInputSelect("Difficulty", difficulty, onChange)}
+      {gameInputSelect("Difficulty", difficulty, onChange, "difficulty")}
       <div className="game-form__input">
-        <label htmlFor="image-url">image url:</label>
+        <label htmlFor="imageUrl">image url:</label>
         <input
           type="text"
-          id="image-url"
+          id="imageUrl"
           className="input-text"
           onChange={onChange}
           required
@@ -185,15 +183,15 @@ const GameForm = ({
         onChangeInputsCheckBox,
         newGame.languages,
       )}
-      {gameInputSelect("Graphics", graphics, onChange)}
+      {gameInputSelect("Graphics", graphics, onChange, "graphics")}
       {gameCheckedButtonOptions(
         "Audience",
         audience,
         onChangeInputsCheckBox,
         newGame.audience,
       )}
-      {gameInputSelect("Grind", grind, onChange)}
-      {gameInputSelect("Game Time", gameTime, onChange)}
+      {gameInputSelect("Grind", grind, onChange, "grind")}
+      {gameInputSelect("Game Time", gameTime, onChange, "gameTime")}
       {gameCheckedButtonOptions(
         "Tags",
         tag,
