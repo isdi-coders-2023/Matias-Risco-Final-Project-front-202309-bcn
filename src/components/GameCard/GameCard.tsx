@@ -12,10 +12,13 @@ interface GameCardParamsStructure {
   game: GameStructure;
 }
 
-const PropetiesToShortDescription = (propeties: string[]): string =>
-  propeties.length > 2
-    ? `${propeties[0]}, ${propeties[1]}, ${propeties.length - 2} more...`
+const PropetiesToShortDescription = (propeties: string[]): string => {
+  const [firstTag, secondTag, ...restTags] = propeties;
+
+  return propeties.length > 2
+    ? `${firstTag}, ${secondTag}, ${restTags.length} more...`
     : propeties.join(", ");
+};
 
 const GameCard = ({
   game: { name, platforms: plataforms, difficulty, languages, imageUrl, id },

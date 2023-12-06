@@ -54,7 +54,7 @@ describe("Given the component Form", () => {
 
       await fireEvent.change(checkElementSpanish, {
         target: {
-          value: "Pepe",
+          value: expectedValue,
         },
       });
 
@@ -81,6 +81,139 @@ describe("Given the component Form", () => {
       await userEvent.click(checkElementSpanish);
 
       expect(checkElementSpanish.checked).toBe(expectedValue);
+    });
+  });
+
+  describe("When the component it is render and the user click on Add Game", () => {
+    test("Then it should call  object toast with the method succes", async () => {
+      const expectedMessage = "Succes in Adding Game";
+      const actionOnSubmit = vitest.fn();
+
+      customRender(<GameForm title="" actionOnSubmit={actionOnSubmit} />, {
+        isMemoryRouter: true,
+        isProvider: true,
+        isToastify: true,
+      });
+
+      const inputElementName = screen.getByRole("textbox", {
+        name: "Name:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementName, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const inputElementImage = screen.getByRole("textbox", {
+        name: "image url:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementImage, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const AddGameButton = screen.getByRole("button", {
+        name: "Add Game",
+      });
+
+      await userEvent.click(AddGameButton);
+
+      const tostifyElement = screen.getByText(expectedMessage);
+
+      expect(tostifyElement).toBeInTheDocument();
+    });
+  });
+
+  describe("When the component it is render and the user click on Add Game but there is a Error", () => {
+    test("Then it should call  object toast with the method Error", async () => {
+      const expectedMessage = "Error in Adding Game";
+      const actionOnSubmit = vitest.fn().mockImplementation(() => {
+        throw new Error("error");
+      });
+
+      customRender(<GameForm title="" actionOnSubmit={actionOnSubmit} />, {
+        isMemoryRouter: true,
+        isProvider: true,
+        isToastify: true,
+      });
+
+      const inputElementName = screen.getByRole("textbox", {
+        name: "Name:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementName, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const inputElementImage = screen.getByRole("textbox", {
+        name: "image url:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementImage, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const AddGameButton = screen.getByRole("button", {
+        name: "Add Game",
+      });
+
+      await userEvent.click(AddGameButton);
+
+      const tostifyElement = screen.getByText(expectedMessage);
+
+      expect(tostifyElement).toBeInTheDocument();
+    });
+  });
+
+  describe("When the component it is render and the user click on Add Game but there is no actionOnSubmit", () => {
+    test("Then it should do nothing", async () => {
+      const errorMessage = "Error in Adding Game";
+      const succesMessage = "Succes in Adding Game";
+
+      customRender(<GameForm title="" />, {
+        isMemoryRouter: true,
+        isProvider: true,
+        isToastify: true,
+      });
+
+      const inputElementName = screen.getByRole("textbox", {
+        name: "Name:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementName, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const inputElementImage = screen.getByRole("textbox", {
+        name: "image url:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(inputElementImage, {
+        target: {
+          value: "Pepe",
+        },
+      });
+
+      const AddGameButton = screen.getByRole("button", {
+        name: "Add Game",
+      });
+
+      await userEvent.click(AddGameButton);
+
+      const tostifyErrorElement = screen.queryByText(errorMessage);
+      const tostifySuccesElement = screen.queryByText(succesMessage);
+
+      expect(tostifyErrorElement).not.toBeInTheDocument();
+      expect(tostifySuccesElement).not.toBeInTheDocument();
     });
   });
 });
