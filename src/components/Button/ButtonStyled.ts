@@ -20,8 +20,10 @@ const ButtonStyled = styled.button`
       height: 48px;
       border-radius: 45px;
       background-color: ${({ theme }) => theme.color.buttonText};
-      font-weight: inherit;
-      padding: 5px;
+      color: ${({ theme }) => theme.color.navigationFont};
+      font-size: ${({ theme }) => theme.typography.titleSize};
+      font-weight: 600;
+      padding: 4px;
     }
   }
 `;

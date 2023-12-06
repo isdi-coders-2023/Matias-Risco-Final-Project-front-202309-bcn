@@ -60,12 +60,12 @@ const GameFormStyled = styled.form`
         border-radius: 45px;
         border: 4px solid ${({ theme }) => theme.color.background};
 
-        &:has(+ :checked) {
+        &:has(> :checked) {
           border: 4px solid ${({ theme }) => theme.color.borderConteinerAprove};
         }
       }
       input {
-        display: none;
+        all: unset;
       }
     }
   }

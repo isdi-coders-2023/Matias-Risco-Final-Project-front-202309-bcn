@@ -115,6 +115,8 @@ export interface GameStructure {
   tags: Tag[];
 }
 
+export type GameWithOutIdStructure = Omit<GameStructure, "id">;
+
 export interface GameStateStructure {
   games: GameStructure[];
 }
