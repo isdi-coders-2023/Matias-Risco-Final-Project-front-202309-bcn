@@ -27,6 +27,11 @@ const gamesSlice = createSlice({
         currentState.games.filter(({ id }) => id !== action.payload),
       ),
     }),
+
+    addGame: (currentState, action: PayloadAction<GameStructure>) => ({
+      ...currentState,
+      games: copyGames([...currentState.games, action.payload]),
+    }),
   },
 });
 
@@ -34,4 +39,5 @@ export default gamesSlice.reducer;
 export const {
   loadGames: loadGamesActionCreator,
   deleteGame: deleteGameActionCreator,
+  addGame: addGameActionCreator,
 } = gamesSlice.actions;
