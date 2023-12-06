@@ -6,7 +6,7 @@ const gamesMock: GameStructure[] = [
     difficulty: "Dark Souls",
     gameTime: "Long enough for a cup of coffee",
     graphics: "Don't look too long at it",
-    grind: "Only if u care about leaderboards/ranks",
+    grind: "Only if u care about leaderboards",
     id: "eqwfewqfweqfwqefweq",
     imageUrl: "https://i.ibb.co/PWKB6yW/ULTRAKILL.jpg",
     languages: ["Danish", "English", "Russian", "Spanish"],
@@ -19,7 +19,7 @@ const gamesMock: GameStructure[] = [
     difficulty: "Easy",
     gameTime: "To infinity and beyond",
     graphics: "Decent",
-    grind: "You'll need a second life for grinding",
+    grind: "You'll need a second life",
     id: "324ftrwesfrgoiw34t",
     imageUrl:
       "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",

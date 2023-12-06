@@ -8,8 +8,8 @@ const HomePageStyled = styled.main`
   padding: 15px 0 122px;
 
   h1 {
-    width: 150px;
     height: 50px;
+    width: 150px;
     background-color: ${({ theme }) => theme.color.containerBackground};
     color: ${({ theme }) => theme.color.secondaryFont};
     text-align: center;
