@@ -19,11 +19,11 @@ export const graphics = [
 
 export const grind = [
   "Nothing to grind",
-  "Only if u care about leaderboards/ranks",
+  "Only if u care about leaderboards",
   "Isn't necessary to progress",
   "Average grind level",
   "Too much grind",
-  "You'll need a second life for grinding",
+  "You'll need a second life",
 ] as const;
 
 export const gameTime = [
