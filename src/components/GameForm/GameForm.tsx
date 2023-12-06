@@ -12,6 +12,7 @@ import {
 } from "../../store/feature/games/types";
 import GameFormStyled from "./GameFormStyled";
 import Button from "../Button/Button";
+import { toast } from "react-toastify";
 
 const gameCheckedButtonOptions = (
   titleOfInputs: string,
@@ -74,10 +75,12 @@ const gameInputSelect = (
 
 interface GameFormParametersStructure {
   title: string;
+  actionOnSubmit?: (game: GameWithOutIdStructure) => void | Promise<void>;
 }
 
 const GameForm = ({
   title,
+  actionOnSubmit,
 }: GameFormParametersStructure): React.ReactElement => {
   const initialGame: GameWithOutIdStructure = {
     audience: [],
@@ -105,6 +108,7 @@ const GameForm = ({
 
     const index = details.indexOf(propetyType);
     let newDetails: string[];
+
     if (index === -1) {
       newDetails = [...details, propetyType];
     } else {
@@ -126,8 +130,27 @@ const GameForm = ({
     }));
   };
 
+  const onSumbit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!actionOnSubmit) {
+      return;
+    }
+
+    try {
+      actionOnSubmit(newGame);
+      toast.success("Succes in Adding Game");
+    } catch {
+      toast.error("Error in Adding Game");
+    }
+  };
+
   return (
-    <GameFormStyled className="game-form" autoComplete="off">
+    <GameFormStyled
+      className="game-form"
+      autoComplete="off"
+      onSubmit={onSumbit}
+    >
       <h2>{title}</h2>
       <div className="game-form__input">
         <label htmlFor="name">Name:</label>

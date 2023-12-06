@@ -63,6 +63,10 @@ const GameFormStyled = styled.form`
         &:has(> :checked) {
           border: 4px solid ${({ theme }) => theme.color.borderConteinerAprove};
         }
+
+        &:has(> :focus) {
+          border: 4px solid ${({ theme }) => theme.color.buttonText};
+        }
       }
       input {
         all: unset;
