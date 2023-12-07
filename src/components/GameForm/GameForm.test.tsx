@@ -2,6 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import customRender from "../../utils/customRender";
 import GameForm from "./GameForm";
 import userEvent from "@testing-library/user-event";
+import { GameWithOutIdStructure } from "../../store/feature/games/types";
 
 describe("Given the component Form", () => {
   describe("When the component it is render", () => {
@@ -111,7 +112,7 @@ describe("Given the component Form", () => {
 
       await fireEvent.change(inputElementImage, {
         target: {
-          value: "Pepe",
+          value: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
         },
       });
 
@@ -121,7 +122,7 @@ describe("Given the component Form", () => {
 
       await userEvent.click(AddGameButton);
 
-      const tostifyElement = screen.getByText(expectedMessage);
+      const tostifyElement = await screen.findByText(expectedMessage);
 
       expect(tostifyElement).toBeInTheDocument();
     });
@@ -134,31 +135,31 @@ describe("Given the component Form", () => {
         throw new Error("error");
       });
 
-      customRender(<GameForm title="" actionOnSubmit={actionOnSubmit} />, {
-        isMemoryRouter: true,
-        isProvider: true,
-        isToastify: true,
-      });
+      const initialGame: GameWithOutIdStructure = {
+        audience: [],
+        difficulty: "Dark Souls",
+        gameTime: "Average",
+        graphics: "Bad",
+        grind: "Average grind level",
+        imageUrl: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
+        languages: [],
+        name: "Pepe",
+        platforms: [],
+        tags: [],
+      };
 
-      const inputElementName = screen.getByRole("textbox", {
-        name: "Name:",
-      }) as HTMLInputElement;
-
-      await fireEvent.change(inputElementName, {
-        target: {
-          value: "Pepe",
+      customRender(
+        <GameForm
+          title=""
+          actionOnSubmit={actionOnSubmit}
+          initialGame={initialGame}
+        />,
+        {
+          isMemoryRouter: true,
+          isProvider: true,
+          isToastify: true,
         },
-      });
-
-      const inputElementImage = screen.getByRole("textbox", {
-        name: "image url:",
-      }) as HTMLInputElement;
-
-      await fireEvent.change(inputElementImage, {
-        target: {
-          value: "Pepe",
-        },
-      });
+      );
 
       const AddGameButton = screen.getByRole("button", {
         name: "Add Game",
@@ -166,7 +167,7 @@ describe("Given the component Form", () => {
 
       await userEvent.click(AddGameButton);
 
-      const tostifyElement = screen.getByText(expectedMessage);
+      const tostifyElement = await screen.findByText(expectedMessage);
 
       expect(tostifyElement).toBeInTheDocument();
     });
@@ -199,7 +200,7 @@ describe("Given the component Form", () => {
 
       await fireEvent.change(inputElementImage, {
         target: {
-          value: "Pepe",
+          value: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
         },
       });
 

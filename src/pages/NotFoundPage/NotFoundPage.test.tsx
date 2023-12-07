@@ -9,7 +9,7 @@ describe("Given the component NotFoundPage", () => {
       const expectedError = "Page not Found";
       const tag = "heading";
 
-      customRender(<NotFoundPage />);
+      customRender(<NotFoundPage />, { isMemoryRouter: true });
 
       const TitleElement = screen.getByRole(tag, { name: expectedTitle });
       const ErrorTextElement = screen.getByRole(tag, { name: expectedError });

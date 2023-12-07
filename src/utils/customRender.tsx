@@ -41,7 +41,6 @@ const customRender = (
 
   const base = (
     <ThemeProvider theme={mainTheme}>
-      {" "}
       <GlobalsStyled />
       {isToastify && <ToastContainer />}
       {children}

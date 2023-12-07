@@ -44,7 +44,7 @@ describe("Given the component HomePage", () => {
 
       await fireEvent.change(inputElementImage, {
         target: {
-          value: "Pepe",
+          value: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
         },
       });
 
