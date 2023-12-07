@@ -61,17 +61,27 @@ const GameCard = ({
         </div>
       </div>
       <div className="game-card__button-container">
-        <NavLink to={`games/info/${id}`} className="game-card__button">
-          <img src="images/icon-info.svg" alt="button" width="48" height="48" />
+        <NavLink to={`/game/info/${id}`} className="game-card__button">
+          <img
+            src="/images/icon-info.svg"
+            alt="button"
+            width="48"
+            height="48"
+          />
           Info
         </NavLink>
-        <NavLink to={`games/edit/${id}`} className="game-card__button">
-          <img src="images/icon-edit.svg" alt="button" width="48" height="48" />
+        <NavLink to={`/game/edit/${id}`} className="game-card__button">
+          <img
+            src="/images/icon-edit.svg"
+            alt="button"
+            width="48"
+            height="48"
+          />
           Edit
         </NavLink>
         <Button className="button--icon" onClick={deleteAction}>
           <img
-            src="images/icon-trash.svg"
+            src="/images/icon-trash.svg"
             alt="button"
             width="48"
             height="48"
