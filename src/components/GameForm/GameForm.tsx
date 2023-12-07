@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   GameWithOutIdStructure,
   audience,
@@ -95,7 +95,12 @@ const GameForm = ({
   },
 }: GameFormParametersStructure): React.ReactElement => {
   const [newGame, setNewGame] = useState(initialGame);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
+
+  useEffect(() => {
+    const { name, imageUrl } = newGame;
+    setDisable(!(name && imageUrl));
+  }, [newGame]);
 
   const onChangeInputsCheckBox = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -131,8 +136,6 @@ const GameForm = ({
       ...newGame,
       [event.target.id]: event.target.value,
     }));
-
-    setDisable(newGame.name.length !== 0 && newGame.imageUrl.length !== 0);
   };
 
   const onSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
