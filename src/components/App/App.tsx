@@ -18,7 +18,7 @@ const App = (): React.ReactElement => {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/game/add" element={<AddGamePage />} />
-        <Route path="/game/add/:idGame" element={<InfoGamePage />} />
+        <Route path="/game/info/:idGame" element={<InfoGamePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <NavigationBar />
