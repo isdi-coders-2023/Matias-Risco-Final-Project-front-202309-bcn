@@ -4,7 +4,7 @@ import ButtonStyled from "./ButtonStyled";
 interface ButtonParamertsStructure {
   className?: string;
   onClick?: () => void | Promise<void>;
-  disable?: boolean | undefined;
+  disable?: boolean;
 }
 
 const Button = ({
