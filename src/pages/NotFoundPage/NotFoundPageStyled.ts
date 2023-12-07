@@ -32,6 +32,20 @@ const NotFoundPageStyled = styled.main`
     background-color: ${({ theme }) => theme.color.containerBackground};
     text-align: center;
   }
+
+  .button {
+    &--text {
+      width: 280px;
+      height: 48px;
+      border-radius: 45px;
+      background-color: ${({ theme }) => theme.color.buttonText};
+      color: ${({ theme }) => theme.color.navigationFont};
+      font-size: ${({ theme }) => theme.typography.titleSize};
+      font-weight: 600;
+      padding: 4px;
+      text-decoration: none;
+    }
+  }
 `;
 
 export default NotFoundPageStyled;

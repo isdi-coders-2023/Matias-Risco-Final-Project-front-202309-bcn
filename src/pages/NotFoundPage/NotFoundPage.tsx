@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../components/Button/Button";
 import NotFoundPageStyled from "./NotFoundPageStyled";
+import { NavLink } from "react-router-dom";
 
 const NotFoundPage = (): React.ReactElement => (
   <NotFoundPageStyled>
@@ -10,7 +10,9 @@ const NotFoundPage = (): React.ReactElement => (
 
       <p>Please go to homepage</p>
 
-      <Button className="button--text">Homepage</Button>
+      <NavLink className="button--text" to="/home">
+        Homepage
+      </NavLink>
     </div>
   </NotFoundPageStyled>
 );
