@@ -5,7 +5,7 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import gameReducer from "./feature/games/GamesSlice";
-import uiReducer from "./feature/ui/UiSlice";
+import uiReducer from "./feature/ui/uiSlice";
 
 export const rootReducer = combineReducers({
   gameState: gameReducer,

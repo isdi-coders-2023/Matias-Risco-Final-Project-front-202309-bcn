@@ -28,10 +28,6 @@ const App = (): React.ReactElement => {
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover
         theme="colored"
       />
     </>

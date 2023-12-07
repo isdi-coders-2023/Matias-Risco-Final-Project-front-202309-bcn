@@ -5,7 +5,7 @@ import {
   GameWithOutIdStructure,
 } from "../store/feature/games/types";
 import { useAppDispatch } from "../store/hooks";
-import { toggleLoadingActionCreator } from "../store/feature/ui/UiSlice";
+import { toggleLoadingActionCreator } from "../store/feature/ui/uiSlice";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -33,14 +33,18 @@ const useGameApi = () => {
   const deleteGameApi = useCallback(
     async (id: string): Promise<GameStructure> => {
       dispatch(toggleLoadingActionCreator());
+
       try {
         const {
           data: { game },
         } = await axios.delete<{ game: GameStructure }>(`/games/delete/${id}`);
+
         dispatch(toggleLoadingActionCreator());
+
         return game;
       } catch {
         dispatch(toggleLoadingActionCreator());
+
         throw new Error("game not found");
       }
     },

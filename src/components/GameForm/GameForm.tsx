@@ -179,7 +179,7 @@ const GameForm = ({
       )}
       {gameInputSelect("Difficulty", difficulty, onChange, "difficulty")}
       <div className="game-form__input">
-        <label htmlFor="imageUrl">image url:</label>
+        <label htmlFor="imageUrl">Image Url:</label>
         <input
           type="url"
           id="imageUrl"
