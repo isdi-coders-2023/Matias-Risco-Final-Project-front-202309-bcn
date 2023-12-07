@@ -27,15 +27,16 @@ const gameCheckedButtonOptions = (
       <ul className="inputs-container">
         {inputs.map((input) => {
           const isChecked = values.includes(input);
+          const id = input.replace(/\s/g, "").toLowerCase();
           return (
-            <li key={input} className="input-checked">
-              <label htmlFor={input}>
+            <li key={id} className="input-checked">
+              <label htmlFor={id}>
                 {input}
                 <input
                   type="checkbox"
                   name={input}
-                  id={input}
-                  accept={titleLowerCase}
+                  id={id}
+                  value={titleLowerCase}
                   onChange={onChange}
                   checked={isChecked}
                 />
@@ -98,10 +99,13 @@ const GameForm = ({
   const onChangeInputsCheckBox = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const details =
-      newGame[
-        event.target.accept as "platforms" | "languages" | "audience" | "tags"
-      ];
+    const propety = event.target.value as
+      | "platforms"
+      | "languages"
+      | "audience"
+      | "tags";
+
+    const details = newGame[propety];
     const propetyType = event.target.id as never;
 
     const index = details.indexOf(propetyType);
@@ -115,7 +119,7 @@ const GameForm = ({
 
     setNewGame((newGame) => ({
       ...newGame,
-      [event.target.accept]: newDetails,
+      [propety]: newDetails,
     }));
   };
 
