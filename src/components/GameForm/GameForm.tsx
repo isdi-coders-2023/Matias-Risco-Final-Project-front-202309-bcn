@@ -75,13 +75,13 @@ const gameInputSelect = (
 interface GameFormParametersStructure {
   title: string;
   actionOnSubmit?: (game: GameWithOutIdStructure) => void | Promise<void>;
+  initialGame?: GameWithOutIdStructure;
 }
 
 const GameForm = ({
   title,
   actionOnSubmit,
-}: GameFormParametersStructure): React.ReactElement => {
-  const initialGame: GameWithOutIdStructure = {
+  initialGame = {
     audience: [],
     difficulty: "Dark Souls",
     gameTime: "Average",
@@ -92,9 +92,10 @@ const GameForm = ({
     name: "",
     platforms: [],
     tags: [],
-  };
-
+  },
+}: GameFormParametersStructure): React.ReactElement => {
   const [newGame, setNewGame] = useState(initialGame);
+  const [disable, setDisable] = useState(false);
 
   const onChangeInputsCheckBox = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -106,7 +107,7 @@ const GameForm = ({
       | "tags";
 
     const details = newGame[propety];
-    const propetyType = event.target.id as never;
+    const propetyType = event.target.name as never;
 
     const index = details.indexOf(propetyType);
     let newDetails: string[];
@@ -123,13 +124,15 @@ const GameForm = ({
     }));
   };
 
-  const onChange = (
+  const onChange = async (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setNewGame((newGame) => ({
       ...newGame,
       [event.target.id]: event.target.value,
     }));
+
+    setDisable(newGame.name.length !== 0 && newGame.imageUrl.length !== 0);
   };
 
   const onSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -162,6 +165,7 @@ const GameForm = ({
           className="input-text"
           onChange={onChange}
           required
+          value={newGame.name}
         />
       </div>
       {gameCheckedButtonOptions(
@@ -174,11 +178,12 @@ const GameForm = ({
       <div className="game-form__input">
         <label htmlFor="imageUrl">image url:</label>
         <input
-          type="text"
+          type="url"
           id="imageUrl"
           className="input-text"
           onChange={onChange}
           required
+          value={newGame.imageUrl}
         />
       </div>
       {gameCheckedButtonOptions(
@@ -202,7 +207,9 @@ const GameForm = ({
         onChangeInputsCheckBox,
         newGame.tags,
       )}
-      <Button className="button--text">Add Game</Button>
+      <Button className="button--text" disable={disable}>
+        Add Game
+      </Button>
     </GameFormStyled>
   );
 };

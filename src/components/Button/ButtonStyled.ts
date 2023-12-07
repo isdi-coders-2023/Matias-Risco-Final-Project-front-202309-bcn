@@ -24,6 +24,11 @@ const ButtonStyled = styled.button`
       font-size: ${({ theme }) => theme.typography.titleSize};
       font-weight: 600;
       padding: 4px;
+
+      &:disabled {
+        background-color: ${({ theme }) => theme.color.background};
+        color: ${({ theme }) => theme.color.mainFont};
+      }
     }
   }
 `;
