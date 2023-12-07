@@ -124,7 +124,7 @@ const GameForm = ({
     }));
   };
 
-  const onChange = async (
+  const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setNewGame((newGame) => ({
