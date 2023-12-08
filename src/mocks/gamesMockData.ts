@@ -7,7 +7,7 @@ const gamesMock: GameStructure[] = [
     gameTime: "Long enough for a cup of coffee",
     graphics: "Don't look too long at it",
     grind: "Only if u care about leaderboards",
-    id: "eqwfewqfweqfwqefweq",
+    id: "656ab2e33eb96014d34e07dd",
     imageUrl: "https://i.ibb.co/PWKB6yW/ULTRAKILL.jpg",
     languages: ["Danish", "English", "Russian", "Spanish"],
     name: "Ultrakill",
@@ -20,7 +20,7 @@ const gamesMock: GameStructure[] = [
     gameTime: "To infinity and beyond",
     graphics: "Decent",
     grind: "You'll need a second life",
-    id: "324ftrwesfrgoiw34t",
+    id: "656ab3423eb96014d34e07de",
     imageUrl:
       "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
     languages: ["Danish", "English", "Russian", "Spanish"],

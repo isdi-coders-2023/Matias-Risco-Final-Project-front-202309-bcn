@@ -70,7 +70,27 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  return { getGamesApi, deleteGameApi, addGameApi };
+  const infoGameApi = useCallback(
+    async (id: string): Promise<GameStructure> => {
+      dispatch(toggleLoadingActionCreator());
+      try {
+        const {
+          data: { game },
+        } = await axios.get<{ game: GameStructure }>(`/games/info/${id}`);
+
+        dispatch(toggleLoadingActionCreator());
+
+        return game;
+      } catch {
+        dispatch(toggleLoadingActionCreator());
+
+        throw new Error("Error game not found");
+      }
+    },
+    [dispatch],
+  );
+
+  return { getGamesApi, deleteGameApi, addGameApi, infoGameApi };
 };
 
 export default useGameApi;
