@@ -39,7 +39,7 @@ describe("Given the component HomePage", () => {
       });
 
       const inputElementImage = screen.getByRole("textbox", {
-        name: "image url:",
+        name: "Image Url:",
       }) as HTMLInputElement;
 
       await fireEvent.change(inputElementImage, {
