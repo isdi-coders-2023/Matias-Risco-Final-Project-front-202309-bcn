@@ -28,4 +28,14 @@ export const handlers = [
       return HttpResponse.json({ game: { ...game, id } });
     },
   ),
+
+  http.get(`${urlApi}/games/info/:idGame`, (req) => {
+    const { idGame } = req.params;
+    const game = mockGames.find((game) => game.id === idGame);
+    if (game === undefined) {
+      return HttpResponse.error();
+    } else {
+      return HttpResponse.json({ game });
+    }
+  }),
 ];

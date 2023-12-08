@@ -11,6 +11,7 @@ import {
 } from "../../store/feature/games/types";
 import { server } from "../../mocks/main";
 import { handlersError } from "../../mocks/handlersError";
+import { setupStore } from "../../utils/setUpStore";
 
 describe("Given the hook useGameApi", () => {
   describe("When getGamesApi is call", () => {
@@ -104,6 +105,57 @@ describe("Given the hook useGameApi", () => {
       }
 
       expect(testError).toBe(expectedError);
+    });
+  });
+
+  describe("When infoGameApi is call with id not in the database in the url", () => {
+    test("it should return a Error", async () => {
+      server.use(...handlersError);
+      const ultrakill = gamesMock[0];
+      let testError: string = "";
+      const expectedError = "Error game not found";
+      const testStore = setupStore({ gameState: { games: [] } });
+
+      const {
+        result: {
+          current: { infoGameApi },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={testStore}>{children}</Provider>
+        ),
+      });
+
+      try {
+        await infoGameApi(ultrakill.id);
+      } catch (error) {
+        testError = (error as Error).message;
+      }
+
+      expect(testError).toBe(expectedError);
+    });
+  });
+
+  describe("When infoGameApi is call with id of Ultrakill in the url", () => {
+    test("it should return a Game containg with info  of Ultrakill", async () => {
+      const ultrakill = gamesMock[0];
+      const testStore = setupStore({
+        gameState: { games: copyGames(gamesMock) },
+      });
+
+      const {
+        result: {
+          current: { infoGameApi },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={testStore}>{children}</Provider>
+        ),
+      });
+
+      const actualGame = await infoGameApi(ultrakill.id);
+
+      expect(actualGame).toStrictEqual(ultrakill);
     });
   });
 });

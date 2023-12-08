@@ -14,4 +14,8 @@ export const handlersError = [
   http.post(`${urlApi}/games/add`, () => {
     return HttpResponse.error();
   }),
+
+  http.get(`${urlApi}/games/info/:idGame`, () => {
+    return HttpResponse.error();
+  }),
 ];
