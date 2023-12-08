@@ -3,7 +3,7 @@ import gamesReducer, {
   addGameActionCreator,
   initialGamesState,
   loadGamesActionCreator,
-} from "../GamesSlice";
+} from "../gamesSlice";
 import gamesMock from "../../../../mocks/gamesMockData";
 
 describe("Given the reducer of games", () => {

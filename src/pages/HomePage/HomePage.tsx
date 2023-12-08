@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
-import { loadGamesActionCreator } from "../../store/feature/games/GamesSlice";
+import { loadGamesActionCreator } from "../../store/feature/games/gamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";

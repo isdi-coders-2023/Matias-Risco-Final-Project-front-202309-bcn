@@ -3,8 +3,8 @@ import {
   deleteGameActionCreator,
   initialGamesState,
   loadGamesActionCreator,
-} from "../GamesSlice";
-import gamesReducer from "../GamesSlice";
+} from "../gamesSlice";
+import gamesReducer from "../gamesSlice";
 
 describe("Given the reducer of games", () => {
   describe("When the reducer recive the actualState and the action deleteGame with id of Ultrakill", () => {

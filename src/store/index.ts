@@ -4,7 +4,7 @@ import {
   Action,
   combineReducers,
 } from "@reduxjs/toolkit";
-import gameReducer from "./feature/games/GamesSlice";
+import gameReducer from "./feature/games/gamesSlice";
 import uiReducer from "./feature/ui/uiSlice";
 
 export const rootReducer = combineReducers({

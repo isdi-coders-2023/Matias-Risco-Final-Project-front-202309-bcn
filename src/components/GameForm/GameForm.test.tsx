@@ -185,7 +185,7 @@ describe("Given the component Form", () => {
       const errorMessage = "Error in Adding Game";
       const succesMessage = "Succes in Adding Game";
 
-      customRender(<GameForm title="" />, {
+      customRender(<GameForm title="" initialGame={initialGame} />, {
         isMemoryRouter: true,
         isProvider: true,
         isToastify: true,
