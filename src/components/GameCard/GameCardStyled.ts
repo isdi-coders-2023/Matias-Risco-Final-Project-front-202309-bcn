@@ -11,6 +11,10 @@ const GameCardStyled = styled.section`
   width: 310px;
 
   .game-card {
+    &__image {
+      object-fit: cover;
+    }
+
     &__description-container {
       display: flex;
       flex-direction: column;
