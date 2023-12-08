@@ -48,6 +48,46 @@ describe("Given the component HomePage", () => {
         },
       });
 
+      const selectElementDifficulty = screen.getByRole("combobox", {
+        name: "Difficulty:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(selectElementDifficulty, {
+        target: {
+          value: "Easy",
+        },
+      });
+
+      const selectElementGraphics = screen.getByRole("combobox", {
+        name: "Graphics:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(selectElementGraphics, {
+        target: {
+          value: "Bad",
+        },
+      });
+
+      const selectElementGrind = screen.getByRole("combobox", {
+        name: "Grind:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(selectElementGrind, {
+        target: {
+          value: "Nothing to grind",
+        },
+      });
+
+      const selectElementGameTime = screen.getByRole("combobox", {
+        name: "Game Time:",
+      }) as HTMLInputElement;
+
+      await fireEvent.change(selectElementGameTime, {
+        target: {
+          value: "Short",
+        },
+      });
+
       const AddGameButton = screen.getByRole("button", {
         name: "Add Game",
       });
