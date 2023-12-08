@@ -16,13 +16,19 @@ const NavigationBarStyled = styled.nav`
 
   .button-icon {
     width: 84px;
-    height: 77px;
+    height: 89px;
     display: flex;
     flex-direction: column;
     gap: 6px;
     align-items: center;
     text-decoration: none;
     color: ${({ theme }) => theme.color.navigationFont};
+    padding: 5px;
+
+    &--active {
+      background-color: ${({ theme }) => theme.color.backgroundHeader};
+      border-radius: 15px;
+    }
   }
 `;
 
