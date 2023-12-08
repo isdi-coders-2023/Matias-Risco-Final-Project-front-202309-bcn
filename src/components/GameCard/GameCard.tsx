@@ -4,7 +4,7 @@ import GameCardStyled from "./GameCardStyled";
 import Button from "../Button/Button";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
-import { deleteGameActionCreator } from "../../store/feature/games/GamesSlice";
+import { deleteGameActionCreator } from "../../store/feature/games/gamesSlice";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";
 

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import GameForm from "../../components/GameForm/GameForm";
 import AddGamePageStyled from "./AddGamePageStyled";
 import { useAppDispatch } from "../../store/hooks";
-import { addGameActionCreator } from "../../store/feature/games/GamesSlice";
+import { addGameActionCreator } from "../../store/feature/games/gamesSlice";
 import { GameWithOutIdStructure } from "../../store/feature/games/types";
 import useGameApi from "../../hooks/useGameApi";
 

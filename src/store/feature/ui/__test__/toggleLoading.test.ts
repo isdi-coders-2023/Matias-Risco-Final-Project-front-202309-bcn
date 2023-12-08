@@ -1,7 +1,7 @@
 import UiSlice, {
   initialUiState,
   toggleLoadingActionCreator,
-} from "../UiSlice";
+} from "../uiSlice";
 
 describe("Given the reducer of UiSlice", () => {
   describe("When the reducer recive the actualState and the action toggleLoadingActionCreator", () => {

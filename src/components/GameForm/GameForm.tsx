@@ -62,7 +62,12 @@ const gameInputSelect = (
       id={propetyName}
       className="input-select"
       onChange={onChange}
+      defaultValue={"DEFAULT"}
+      required
     >
+      <option key="DEFAULT" value="DEFAULT" disabled>
+        -- select an option --
+      </option>
       {possibleInput.map((input) => (
         <option key={input} value={input}>
           {input}
@@ -83,10 +88,10 @@ const GameForm = ({
   actionOnSubmit,
   initialGame = {
     audience: [],
-    difficulty: "Dark Souls",
-    gameTime: "Average",
-    graphics: "Bad",
-    grind: "Average grind level",
+    difficulty: "DEFAULT" as "Easy",
+    gameTime: "DEFAULT" as "Long",
+    graphics: "DEFAULT" as "Bad",
+    grind: "DEFAULT" as "Too much grind",
     imageUrl: "",
     languages: [],
     name: "",
@@ -98,8 +103,17 @@ const GameForm = ({
   const [disable, setDisable] = useState(true);
 
   useEffect(() => {
-    const { name, imageUrl } = newGame;
-    setDisable(!(name && imageUrl));
+    const { name, imageUrl, difficulty, gameTime, graphics, grind } = newGame;
+    setDisable(
+      !(
+        name &&
+        imageUrl &&
+        (difficulty as string) !== "DEFAULT" &&
+        (gameTime as string) !== "DEFAULT" &&
+        (graphics as string) !== "DEFAULT" &&
+        (grind as string) !== "DEFAULT"
+      ),
+    );
   }, [newGame]);
 
   const onChangeInputsCheckBox = (
@@ -179,7 +193,7 @@ const GameForm = ({
       )}
       {gameInputSelect("Difficulty", difficulty, onChange, "difficulty")}
       <div className="game-form__input">
-        <label htmlFor="imageUrl">image url:</label>
+        <label htmlFor="imageUrl">Image Url:</label>
         <input
           type="url"
           id="imageUrl"

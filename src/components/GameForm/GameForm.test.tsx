@@ -4,6 +4,19 @@ import GameForm from "./GameForm";
 import userEvent from "@testing-library/user-event";
 import { GameWithOutIdStructure } from "../../store/feature/games/types";
 
+const initialGame: GameWithOutIdStructure = {
+  audience: [],
+  difficulty: "Dark Souls",
+  gameTime: "Average",
+  graphics: "Bad",
+  grind: "Average grind level",
+  imageUrl: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
+  languages: [],
+  name: "Pepe",
+  platforms: [],
+  tags: [],
+};
+
 describe("Given the component Form", () => {
   describe("When the component it is render", () => {
     test("Then there should be in screen a heading with 'New Game'", () => {
@@ -90,11 +103,18 @@ describe("Given the component Form", () => {
       const expectedMessage = "Succes in Adding Game";
       const actionOnSubmit = vitest.fn();
 
-      customRender(<GameForm title="" actionOnSubmit={actionOnSubmit} />, {
-        isMemoryRouter: true,
-        isProvider: true,
-        isToastify: true,
-      });
+      customRender(
+        <GameForm
+          title=""
+          actionOnSubmit={actionOnSubmit}
+          initialGame={initialGame}
+        />,
+        {
+          isMemoryRouter: true,
+          isProvider: true,
+          isToastify: true,
+        },
+      );
 
       const inputElementName = screen.getByRole("textbox", {
         name: "Name:",
@@ -107,7 +127,7 @@ describe("Given the component Form", () => {
       });
 
       const inputElementImage = screen.getByRole("textbox", {
-        name: "image url:",
+        name: "Image Url:",
       }) as HTMLInputElement;
 
       await fireEvent.change(inputElementImage, {
@@ -134,19 +154,6 @@ describe("Given the component Form", () => {
       const actionOnSubmit = vitest.fn().mockImplementation(() => {
         throw new Error("error");
       });
-
-      const initialGame: GameWithOutIdStructure = {
-        audience: [],
-        difficulty: "Dark Souls",
-        gameTime: "Average",
-        graphics: "Bad",
-        grind: "Average grind level",
-        imageUrl: "https://i.ibb.co/PwP3KKr/Alien-Swarm.webp",
-        languages: [],
-        name: "Pepe",
-        platforms: [],
-        tags: [],
-      };
 
       customRender(
         <GameForm
@@ -178,7 +185,7 @@ describe("Given the component Form", () => {
       const errorMessage = "Error in Adding Game";
       const succesMessage = "Succes in Adding Game";
 
-      customRender(<GameForm title="" />, {
+      customRender(<GameForm title="" initialGame={initialGame} />, {
         isMemoryRouter: true,
         isProvider: true,
         isToastify: true,
@@ -195,7 +202,7 @@ describe("Given the component Form", () => {
       });
 
       const inputElementImage = screen.getByRole("textbox", {
-        name: "image url:",
+        name: "Image Url:",
       }) as HTMLInputElement;
 
       await fireEvent.change(inputElementImage, {

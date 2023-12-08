@@ -1,7 +1,7 @@
 import gamesMock from "../../../../mocks/gamesMockData";
-import { initialGamesState, loadGamesActionCreator } from "../GamesSlice";
+import { initialGamesState, loadGamesActionCreator } from "../gamesSlice";
 import { copyGame } from "../utils";
-import gamesReducer from "../GamesSlice";
+import gamesReducer from "../gamesSlice";
 
 describe("Given the reducer of games", () => {
   describe("When the reducer recive the actualState and the action loadGames with games", () => {
