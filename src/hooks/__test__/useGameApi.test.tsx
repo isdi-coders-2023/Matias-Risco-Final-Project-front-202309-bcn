@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { copyGames } from "../../store/feature/games/utils";
+import { copyGame, copyGames } from "../../store/feature/games/utils";
 import gamesMock from "../../mocks/gamesMockData";
 import useGameApi from "../useGameApi";
 import { PropsWithChildren } from "react";
@@ -8,6 +8,7 @@ import { store } from "../../store";
 import {
   GameStructure,
   GameWithOutIdStructure,
+  GameWithPartialBodyStructure,
 } from "../../store/feature/games/types";
 import { server } from "../../mocks/main";
 import { handlersError } from "../../mocks/handlersError";
@@ -156,6 +157,75 @@ describe("Given the hook useGameApi", () => {
       const actualGame = await infoGameApi(ultrakill.id);
 
       expect(actualGame).toStrictEqual(ultrakill);
+    });
+  });
+
+  describe("When editGameApi is call with id of Ultrakill in the url", () => {
+    test("it should return a Game containg with edit  of Ultrakill", async () => {
+      const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
+
+      const testStore = setupStore({
+        gameState: { games: copyGames(gamesMock) },
+      });
+
+      delete ultrakill.audience;
+      delete ultrakill.difficulty;
+      delete ultrakill.imageUrl;
+
+      ultrakill.graphics = "MS-DOS";
+
+      const {
+        result: {
+          current: { editGame },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={testStore}>{children}</Provider>
+        ),
+      });
+
+      const actualGame = await editGame(ultrakill);
+
+      expect(actualGame).toEqual(expect.objectContaining(ultrakill));
+    });
+  });
+
+  describe("When editGameApi is call with id of Ultrakill in the url but there is a error", () => {
+    test("it should throw a Error", async () => {
+      server.use(...handlersError);
+      const expectedError = "Error game not found";
+      const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
+
+      const testStore = setupStore({
+        gameState: { games: copyGames(gamesMock) },
+      });
+
+      delete ultrakill.audience;
+      delete ultrakill.difficulty;
+      delete ultrakill.imageUrl;
+
+      ultrakill.graphics = "MS-DOS";
+
+      const {
+        result: {
+          current: { editGame },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={testStore}>{children}</Provider>
+        ),
+      });
+      let actualError: Error = {} as Error;
+
+      try {
+        await editGame(ultrakill);
+      } catch (error) {
+        actualError = error as Error;
+      }
+
+      expect(actualError).toEqual(
+        expect.objectContaining({ message: expectedError }),
+      );
     });
   });
 });
