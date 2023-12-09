@@ -1,6 +1,9 @@
 import { http, HttpResponse, PathParams } from "msw";
 import { mockGames } from "../setupTests";
-import { GameWithOutIdStructure } from "../store/feature/games/types";
+import {
+  GameWithOutIdStructure,
+  GameWithPartialBodyStructure,
+} from "../store/feature/games/types";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -38,4 +41,19 @@ export const handlers = [
       return HttpResponse.json({ game });
     }
   }),
+
+  http.patch<PathParams, { game: GameWithPartialBodyStructure }>(
+    `${urlApi}/games/edit/:idGame`,
+    async ({ params, request }) => {
+      const { idGame } = params;
+      const { game } = await request.json();
+      const gameApi = mockGames.find((game) => game.id === idGame);
+
+      if (gameApi === undefined) {
+        return HttpResponse.error();
+      } else {
+        return HttpResponse.json({ game: { ...gameApi, ...game } });
+      }
+    },
+  ),
 ];

@@ -7,6 +7,7 @@ import usePageHooks from "../../hooks/usePageHooks";
 import EditGamePageStyled from "./EditGamePageStyled";
 import { initialGame } from "../../store/feature/games/utils";
 import { editGameActionCreator } from "../../store/feature/games/gamesSlice";
+import useGameApi from "../../hooks/useGameApi";
 
 const EditGamePage = (): React.ReactElement => {
   const { idGame } = useParams<{ idGame: string }>();
@@ -14,6 +15,7 @@ const EditGamePage = (): React.ReactElement => {
   const [game, setGame] = useState(initialGame);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   const { loadingGameByIdParams } = usePageHooks();
+  const { editGame } = useGameApi();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,9 +24,10 @@ const EditGamePage = (): React.ReactElement => {
 
   const onSumbit = useCallback(
     async (game: GameStructure) => {
-      dispatch(editGameActionCreator(game));
+      const gameEdited = await editGame(game);
+      dispatch(editGameActionCreator(gameEdited));
     },
-    [dispatch],
+    [dispatch, editGame],
   );
 
   const isGame: boolean = game.id?.length !== 0;

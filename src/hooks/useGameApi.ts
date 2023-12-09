@@ -1,8 +1,9 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import {
   GameStructure,
   GameWithOutIdStructure,
+  GameWithPartialBodyStructure,
 } from "../store/feature/games/types";
 import { useAppDispatch } from "../store/hooks";
 import { toggleLoadingActionCreator } from "../store/feature/ui/uiSlice";
@@ -90,7 +91,31 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  return { getGamesApi, deleteGameApi, addGameApi, infoGameApi };
+  const editGame = useCallback(
+    async (editedGame: GameWithPartialBodyStructure) => {
+      dispatch(toggleLoadingActionCreator());
+      try {
+        const { id } = editedGame;
+
+        const {
+          data: { game },
+        } = await axios.patch<
+          { game: GameWithPartialBodyStructure },
+          AxiosResponse<{ game: GameStructure }>
+        >(`/games/edit/${id}`, { game: editedGame });
+
+        dispatch(toggleLoadingActionCreator());
+        return game;
+      } catch {
+        dispatch(toggleLoadingActionCreator());
+
+        throw new Error("Error game not found");
+      }
+    },
+    [dispatch],
+  );
+
+  return { getGamesApi, deleteGameApi, addGameApi, infoGameApi, editGame };
 };
 
 export default useGameApi;
