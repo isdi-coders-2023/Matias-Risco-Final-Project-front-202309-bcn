@@ -1,33 +1,33 @@
-import { GameStructure } from "../types";
+import { GameWithPartialBodyStructure } from "../types";
 import gamesReducer, {
-  addGameActionCreator,
+  editGameActionCreator,
   initialGamesState,
   loadGamesActionCreator,
 } from "../gamesSlice";
 import gamesMock from "../../../../mocks/gamesMockData";
 
 describe("Given the reducer of games", () => {
-  describe("When the reducer recive the actualState and the action addGame with the info Ultrakill", () => {
+  describe("When the reducer recive the actualState and the action editGame with the info Ultrakill", () => {
     test("then it should return a newState with games updated", () => {
-      const newGame: GameStructure = {
+      const newGame: GameWithPartialBodyStructure = {
         name: "new Game",
-        audience: [],
         difficulty: "Dark Souls",
         gameTime: "Average",
         graphics: "Bad",
         grind: "Average grind level",
-        id: "1241asfay4w23",
-        imageUrl: "",
-        languages: [],
-        platforms: [],
-        tags: [],
+        id: "656ab2e33eb96014d34e07dd",
+        imageUrl: "asdaf",
+        languages: ["German", "Danish", "Dutch", "Finnish"],
+        platforms: ["Linux"],
+        tags: ["Action", "2D", "Early Access"],
       };
+
       const actualState = gamesReducer(
         initialGamesState,
         loadGamesActionCreator(gamesMock),
       );
 
-      const actionAdd = addGameActionCreator(newGame);
+      const actionAdd = editGameActionCreator(newGame);
 
       const newState = gamesReducer(actualState, actionAdd);
 

@@ -1,17 +1,18 @@
-import { useCallback } from "react";
 import GameForm from "../../components/GameForm/GameForm";
 import AddGamePageStyled from "./AddGamePageStyled";
+import { useCallback } from "react";
+import { GameWithPartialIdStructure } from "../../store/feature/games/types";
 import { useAppDispatch } from "../../store/hooks";
-import { addGameActionCreator } from "../../store/feature/games/gamesSlice";
-import { GameWithOutIdStructure } from "../../store/feature/games/types";
 import useGameApi from "../../hooks/useGameApi";
+import { addGameActionCreator } from "../../store/feature/games/gamesSlice";
 
 const AddGamePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { addGameApi } = useGameApi();
 
   const onSumbit = useCallback(
-    async (game: GameWithOutIdStructure) => {
+    async (game: GameWithPartialIdStructure) => {
+      delete game.id;
       const newGame = await addGameApi(game);
 
       dispatch(addGameActionCreator(newGame));
@@ -22,7 +23,7 @@ const AddGamePage = (): React.ReactElement => {
   return (
     <AddGamePageStyled>
       <h1>Add Game</h1>
-      <GameForm title="New Game" actionOnSubmit={onSumbit} />
+      <GameForm title="New" buttonText="Add" actionOnSubmit={onSumbit} />
     </AddGamePageStyled>
   );
 };

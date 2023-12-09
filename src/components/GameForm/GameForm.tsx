@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  GameWithOutIdStructure,
+  type GameStructure,
   audience,
   difficulty,
   gameTime,
@@ -54,7 +54,8 @@ const gameInputSelect = (
   titleOfInput: string,
   possibleInput: readonly string[],
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-  propetyName: string,
+  propetyName: keyof GameStructure,
+  initialGame: GameStructure,
 ): React.ReactElement => (
   <div className="game-form__input">
     <label htmlFor={propetyName}>{titleOfInput}: </label>
@@ -63,7 +64,7 @@ const gameInputSelect = (
       id={propetyName}
       className="input-select"
       onChange={onChange}
-      defaultValue={"DEFAULT"}
+      defaultValue={initialGame[propetyName]}
       required
     >
       <option key="DEFAULT" value="DEFAULT" disabled>
@@ -79,13 +80,15 @@ const gameInputSelect = (
 );
 
 interface GameFormParametersStructure {
-  title: string;
-  actionOnSubmit?: (game: GameWithOutIdStructure) => void | Promise<void>;
-  initialGame?: GameWithOutIdStructure;
+  title: "New" | "Edit";
+  buttonText: "Add" | "Modify";
+  actionOnSubmit?: (game: GameStructure) => void | Promise<void>;
+  initialGame?: GameStructure;
 }
 
 const GameForm = ({
   title,
+  buttonText,
   actionOnSubmit,
   initialGame = {
     audience: [],
@@ -98,6 +101,7 @@ const GameForm = ({
     name: "",
     platforms: [],
     tags: [],
+    id: "",
   },
 }: GameFormParametersStructure): React.ReactElement => {
   const [newGame, setNewGame] = useState(initialGame);
@@ -154,21 +158,24 @@ const GameForm = ({
     }));
   };
 
-  const onSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSumbit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    if (!actionOnSubmit) {
-      return;
-    }
+      if (actionOnSubmit === undefined) {
+        return;
+      }
 
-    try {
-      await actionOnSubmit(newGame);
-      toast.success("Succes in Adding Game");
-      setIsRedirec(true);
-    } catch {
-      toast.error("Error in Adding Game");
-    }
-  };
+      try {
+        await actionOnSubmit(newGame);
+        toast.success(`Succes in ${buttonText} Game`);
+        setIsRedirec(true);
+      } catch {
+        toast.error(`Error in ${buttonText} Game`);
+      }
+    },
+    [actionOnSubmit, buttonText, newGame],
+  );
 
   return (
     <GameFormStyled
@@ -176,7 +183,7 @@ const GameForm = ({
       autoComplete="off"
       onSubmit={onSumbit}
     >
-      <h2>{title}</h2>
+      <h2>{title} Game</h2>
       <div className="game-form__input">
         <label htmlFor="name">Name:</label>
         <input
@@ -194,7 +201,13 @@ const GameForm = ({
         onChangeInputsCheckBox,
         newGame.platforms,
       )}
-      {gameInputSelect("Difficulty", difficulty, onChange, "difficulty")}
+      {gameInputSelect(
+        "Difficulty",
+        difficulty,
+        onChange,
+        "difficulty",
+        initialGame,
+      )}
       <div className="game-form__input">
         <label htmlFor="imageUrl">Image Url:</label>
         <input
@@ -212,15 +225,21 @@ const GameForm = ({
         onChangeInputsCheckBox,
         newGame.languages,
       )}
-      {gameInputSelect("Graphics", graphics, onChange, "graphics")}
+      {gameInputSelect("Graphics", graphics, onChange, "graphics", initialGame)}
       {gameCheckedButtonOptions(
         "Audience",
         audience,
         onChangeInputsCheckBox,
         newGame.audience,
       )}
-      {gameInputSelect("Grind", grind, onChange, "grind")}
-      {gameInputSelect("Game Time", gameTime, onChange, "gameTime")}
+      {gameInputSelect("Grind", grind, onChange, "grind", initialGame)}
+      {gameInputSelect(
+        "Game Time",
+        gameTime,
+        onChange,
+        "gameTime",
+        initialGame,
+      )}
       {gameCheckedButtonOptions(
         "Tags",
         tag,
@@ -228,7 +247,7 @@ const GameForm = ({
         newGame.tags,
       )}
       <Button className="button--text" disable={disable}>
-        Add Game
+        {buttonText} Game
       </Button>
       {isRedirec && <Navigate to="/home" />}
     </GameFormStyled>
