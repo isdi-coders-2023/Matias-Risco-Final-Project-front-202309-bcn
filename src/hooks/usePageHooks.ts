@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { loadGamesActionCreator } from "../store/feature/games/gamesSlice";
 import { useAppDispatch } from "../store/hooks";
 
-interface dependenciesStructure {
+interface DependenciesStructure {
   games: GameStructure[];
   setGame: React.Dispatch<React.SetStateAction<GameStructure>>;
   setIsErrorLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +18,7 @@ const usePageHooks = () => {
   const loadingGameByIdParams = useCallback(
     async (
       idGame: string,
-      { games, setGame, setIsErrorLoading }: dependenciesStructure,
+      { games, setGame, setIsErrorLoading }: DependenciesStructure,
     ) => {
       let newGame = games.find(({ id }) => id === idGame);
 
@@ -28,7 +28,7 @@ const usePageHooks = () => {
       }
 
       try {
-        newGame = await infoGameApi(idGame!);
+        newGame = await infoGameApi(idGame);
         setGame(newGame);
         dispatch(loadGamesActionCreator([...games, newGame]));
       } catch (error) {
