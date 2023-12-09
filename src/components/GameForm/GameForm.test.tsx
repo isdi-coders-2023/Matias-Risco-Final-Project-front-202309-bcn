@@ -2,9 +2,9 @@ import { fireEvent, screen } from "@testing-library/react";
 import customRender from "../../utils/customRender";
 import GameForm from "./GameForm";
 import userEvent from "@testing-library/user-event";
-import { GameWithOutIdStructure } from "../../store/feature/games/types";
+import { GameStructure } from "../../store/feature/games/types";
 
-const initialGame: GameWithOutIdStructure = {
+const initialGame: GameStructure = {
   audience: [],
   difficulty: "Dark Souls",
   gameTime: "Average",
@@ -15,6 +15,7 @@ const initialGame: GameWithOutIdStructure = {
   name: "Pepe",
   platforms: [],
   tags: [],
+  id: "",
 };
 
 describe("Given the component Form", () => {
@@ -23,7 +24,7 @@ describe("Given the component Form", () => {
       const expectedText = "New Game";
       const expectedTag = "heading";
 
-      customRender(<GameForm title="New Game" />, {
+      customRender(<GameForm title="New" buttonText="Add" />, {
         isMemoryRouter: true,
         isProvider: true,
       });
@@ -42,7 +43,7 @@ describe("Given the component Form", () => {
       const expectedTag = "checkbox";
       const expectedValue = true;
 
-      customRender(<GameForm title="New Game" />);
+      customRender(<GameForm title="New" buttonText="Add" />);
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -60,7 +61,7 @@ describe("Given the component Form", () => {
       const expectedTag = "textbox";
       const expectedValue = "Pepe";
 
-      customRender(<GameForm title="New Game" />);
+      customRender(<GameForm title="New" buttonText="Add" />);
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -82,7 +83,7 @@ describe("Given the component Form", () => {
       const expectedTag = "checkbox";
       const expectedValue = false;
 
-      customRender(<GameForm title="New Game" />);
+      customRender(<GameForm title="New" buttonText="Add" />);
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -100,12 +101,13 @@ describe("Given the component Form", () => {
 
   describe("When the component it is render and the user click on Add Game", () => {
     test("Then it should call  object toast with the method succes", async () => {
-      const expectedMessage = "Succes in Adding Game";
+      const expectedMessage = "Succes in Add Game";
       const actionOnSubmit = vitest.fn();
 
       customRender(
         <GameForm
-          title=""
+          title="New"
+          buttonText="Add"
           actionOnSubmit={actionOnSubmit}
           initialGame={initialGame}
         />,
@@ -150,14 +152,15 @@ describe("Given the component Form", () => {
 
   describe("When the component it is render and the user click on Add Game but there is a Error", () => {
     test("Then it should call  object toast with the method Error", async () => {
-      const expectedMessage = "Error in Adding Game";
+      const expectedMessage = "Error in Add Game";
       const actionOnSubmit = vitest.fn().mockImplementation(() => {
         throw new Error("error");
       });
 
       customRender(
         <GameForm
-          title=""
+          title="New"
+          buttonText="Add"
           actionOnSubmit={actionOnSubmit}
           initialGame={initialGame}
         />,
@@ -182,14 +185,17 @@ describe("Given the component Form", () => {
 
   describe("When the component it is render and the user click on Add Game but there is no actionOnSubmit", () => {
     test("Then it should do nothing", async () => {
-      const errorMessage = "Error in Adding Game";
-      const succesMessage = "Succes in Adding Game";
+      const errorMessage = "Error in Add Game";
+      const succesMessage = "Succes in Add Game";
 
-      customRender(<GameForm title="" initialGame={initialGame} />, {
-        isMemoryRouter: true,
-        isProvider: true,
-        isToastify: true,
-      });
+      customRender(
+        <GameForm title="New" buttonText="Add" initialGame={initialGame} />,
+        {
+          isMemoryRouter: true,
+          isProvider: true,
+          isToastify: true,
+        },
+      );
 
       const inputElementName = screen.getByRole("textbox", {
         name: "Name:",

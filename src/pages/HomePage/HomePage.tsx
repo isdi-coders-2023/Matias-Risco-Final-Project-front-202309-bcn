@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
 import { loadGamesActionCreator } from "../../store/feature/games/gamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
@@ -10,9 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 const HomePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getGamesApi } = useGameApi();
+  const { games } = useAppSelector(({ gameState }) => gameState);
 
   useEffect(() => {
     (async () => {
+      if (games.length !== 0) {
+        return;
+      }
+
       try {
         const gamesData = await getGamesApi();
         dispatch(loadGamesActionCreator(gamesData));
@@ -20,7 +25,7 @@ const HomePage = (): React.ReactElement => {
         await toast.error("Error in loading page");
       }
     })();
-  }, [dispatch, getGamesApi]);
+  }, [dispatch, games.length, getGamesApi]);
 
   return (
     <HomePageStyled>

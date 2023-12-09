@@ -117,6 +117,15 @@ export interface GameStructure {
 
 export type GameWithOutIdStructure = Omit<GameStructure, "id">;
 
+export interface GameWithPartialBodyStructure
+  extends Partial<GameWithOutIdStructure> {
+  id: string;
+}
+
+export interface GameWithPartialIdStructure extends GameWithOutIdStructure {
+  id?: string;
+}
+
 export interface GameStateStructure {
   games: GameStructure[];
 }

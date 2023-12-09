@@ -8,6 +8,7 @@ import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import AddGamePage from "../../pages/AddGamePage/AddGamePage";
 import { ToastContainer } from "react-toastify";
 import InfoGamePage from "../../pages/InfoGamePage/InfoGamePage";
+import EditGamePage from "../../pages/EditGamePage/EditGamePage";
 
 const App = (): React.ReactElement => {
   const { isLoading } = useAppSelector(({ uiState }) => uiState);
@@ -19,6 +20,7 @@ const App = (): React.ReactElement => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/game/add" element={<AddGamePage />} />
         <Route path="/game/info/:idGame" element={<InfoGamePage />} />
+        <Route path="/game/edit/:idGame" element={<EditGamePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <NavigationBar />
