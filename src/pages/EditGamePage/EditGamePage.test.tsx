@@ -7,8 +7,8 @@ import userEvent from "@testing-library/user-event";
 
 describe("Given the component EditGamePage", () => {
   describe("When EditGamePage it is render", () => {
-    test("the user should see the heading of EditGamePage is Edit Game", () => {
-      const expetedText = "Edit Game";
+    test("the user should see the heading of EditGamePage is Modify", () => {
+      const expetedText = "Modify";
       const tag = "heading";
 
       customRender(<EditGamePage />, {

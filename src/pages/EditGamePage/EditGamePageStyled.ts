@@ -5,7 +5,7 @@ const EditGamePageStyled = styled.main`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding: 15px 0 122px;
+  padding: 15px 0 134px;
 
   h1 {
     height: 50px;

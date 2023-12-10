@@ -3,11 +3,11 @@ import { styled } from "styled-components";
 const GameInfoStyled = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 17.5px;
   gap: 15px;
   align-items: center;
   background-color: ${({ theme }) => theme.color.containerBackground};
-  border-radius: 45px;
+  border-radius: 25px;
   min-width: 305px;
   width: 85vw;
   max-width: 600px;
