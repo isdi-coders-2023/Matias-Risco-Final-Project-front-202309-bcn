@@ -3,12 +3,12 @@ import { styled } from "styled-components";
 const GameCardStyled = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 17.5px;
   gap: 15px;
   align-items: center;
   background-color: ${({ theme }) => theme.color.containerBackground};
-  border-radius: 45px;
-  width: 310px;
+  border-radius: 25px;
+  width: 305px;
 
   .game-card {
     &__image {
@@ -19,6 +19,7 @@ const GameCardStyled = styled.section`
       display: flex;
       flex-direction: column;
       align-items: start;
+      width: 100%;
       gap: 15px;
     }
 

@@ -34,7 +34,7 @@ const EditGamePage = (): React.ReactElement => {
 
   return (
     <EditGamePageStyled>
-      <h1>Edit Game</h1>
+      <h1>Modify</h1>
       {isGame && (
         <GameForm
           title="Edit"

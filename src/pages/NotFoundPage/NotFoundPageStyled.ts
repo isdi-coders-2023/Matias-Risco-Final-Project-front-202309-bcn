@@ -5,7 +5,7 @@ const NotFoundPageStyled = styled.main`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding: 15px 0 122px;
+  padding: 15px 0 134px;
 
   h1 {
     width: 150px;

@@ -4,10 +4,10 @@ const GameFormStyled = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 15px;
+  padding: 17.5px;
   align-items: start;
   background-color: ${({ theme }) => theme.color.containerBackground};
-  border-radius: 45px;
+  border-radius: 25px;
   min-width: 305px;
   width: 85vw;
   max-width: 600px;
