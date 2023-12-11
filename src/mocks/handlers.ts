@@ -4,6 +4,7 @@ import {
   GameWithOutIdStructure,
   GameWithPartialBodyStructure,
 } from "../store/feature/games/types";
+import gamesMock from "./gamesMockData";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -63,4 +64,8 @@ export const handlers = [
       }
     },
   ),
+
+  http.get(`${urlApi}/games/count`, () => {
+    return HttpResponse.json({ numberGames: gamesMock.length });
+  }),
 ];

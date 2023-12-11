@@ -101,7 +101,7 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  const editGame = useCallback(
+  const editGameApi = useCallback(
     async (editedGame: GameWithPartialBodyStructure) => {
       dispatch(toggleLoadingActionCreator());
       try {
@@ -123,7 +123,26 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  return { getGamesApi, deleteGameApi, addGameApi, infoGameApi, editGame };
+  const countGameApi = useCallback(async () => {
+    try {
+      const {
+        data: { numberGames },
+      } = await axios.get<{ numberGames: number }>("/games/count");
+
+      return numberGames;
+    } catch {
+      throw new Error("Error game not found");
+    }
+  }, []);
+
+  return {
+    getGamesApi,
+    deleteGameApi,
+    addGameApi,
+    infoGameApi,
+    editGameApi,
+    countGameApi,
+  };
 };
 
 export default useGameApi;
