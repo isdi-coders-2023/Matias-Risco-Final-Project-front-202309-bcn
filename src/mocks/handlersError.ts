@@ -19,7 +19,7 @@ export const handlersError = [
     return HttpResponse.error();
   }),
 
-  http.patch(`${urlApi}/games/edit/:idGame`, () => {
+  http.patch(`${urlApi}/games/edit`, () => {
     return HttpResponse.error();
   }),
 ];

@@ -19,7 +19,7 @@ const AddGamePage = (): React.ReactElement => {
     },
     [addGameApi, dispatch],
   );
-
+  window.scroll(0, 0);
   return (
     <AddGamePageStyled>
       <h1>Add Game</h1>

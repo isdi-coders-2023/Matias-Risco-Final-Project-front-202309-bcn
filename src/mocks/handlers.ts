@@ -51,11 +51,10 @@ export const handlers = [
   }),
 
   http.patch<PathParams, { game: GameWithPartialBodyStructure }>(
-    `${urlApi}/games/edit/:idGame`,
-    async ({ params, request }) => {
-      const { idGame } = params;
+    `${urlApi}/games/edit`,
+    async ({ request }) => {
       const { game } = await request.json();
-      const gameApi = mockGames.find((game) => game.id === idGame);
+      const gameApi = mockGames.find((game) => game.id === game.id);
 
       if (gameApi === undefined) {
         return HttpResponse.error();

@@ -105,14 +105,12 @@ const useGameApi = () => {
     async (editedGame: GameWithPartialBodyStructure) => {
       dispatch(toggleLoadingActionCreator());
       try {
-        const { id } = editedGame;
-
         const {
           data: { game },
         } = await axios.patch<
           { game: GameWithPartialBodyStructure },
           AxiosResponse<{ game: GameStructure }>
-        >(`/games/edit/${id}`, { game: editedGame });
+        >(`/games/edit`, { game: editedGame });
 
         dispatch(toggleLoadingActionCreator());
         return game;

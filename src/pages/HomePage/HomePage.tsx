@@ -27,6 +27,7 @@ const HomePage = (): React.ReactElement => {
       } catch (error) {
         await toast.error("Error in loading page");
       }
+      window.scroll(0, 0);
     })();
   }, [dispatch, games.length, getGamesApi, page]);
 
