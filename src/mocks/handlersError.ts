@@ -22,4 +22,8 @@ export const handlersError = [
   http.patch(`${urlApi}/games/edit`, () => {
     return HttpResponse.error();
   }),
+
+  http.get(`${urlApi}/games/count`, () => {
+    return HttpResponse.error();
+  }),
 ];

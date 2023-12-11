@@ -3,6 +3,7 @@ import customRender from "../../utils/customRender";
 import GameForm from "./GameForm";
 import userEvent from "@testing-library/user-event";
 import { GameStructure } from "../../store/feature/games/types";
+import { Route, Routes } from "react-router-dom";
 
 const initialGame: GameStructure = {
   audience: [],
@@ -24,10 +25,15 @@ describe("Given the component Form", () => {
       const expectedText = "New Game";
       const expectedTag = "heading";
 
-      customRender(<GameForm title="New" buttonText="Add" />, {
-        isMemoryRouter: true,
-        isProvider: true,
-      });
+      customRender(
+        <Routes>
+          <Route path="/" element={<GameForm title="New" buttonText="Add" />} />
+        </Routes>,
+        {
+          isMemoryRouter: true,
+          isProvider: true,
+        },
+      );
 
       const imgElement = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -43,7 +49,12 @@ describe("Given the component Form", () => {
       const expectedTag = "checkbox";
       const expectedValue = true;
 
-      customRender(<GameForm title="New" buttonText="Add" />);
+      customRender(
+        <Routes>
+          <Route path="/" element={<GameForm title="New" buttonText="Add" />} />
+        </Routes>,
+        { isMemoryRouter: true },
+      );
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -61,7 +72,12 @@ describe("Given the component Form", () => {
       const expectedTag = "textbox";
       const expectedValue = "Pepe";
 
-      customRender(<GameForm title="New" buttonText="Add" />);
+      customRender(
+        <Routes>
+          <Route path="/" element={<GameForm title="New" buttonText="Add" />} />
+        </Routes>,
+        { isMemoryRouter: true },
+      );
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -83,7 +99,12 @@ describe("Given the component Form", () => {
       const expectedTag = "checkbox";
       const expectedValue = false;
 
-      customRender(<GameForm title="New" buttonText="Add" />);
+      customRender(
+        <Routes>
+          <Route path="/" element={<GameForm title="New" buttonText="Add" />} />
+        </Routes>,
+        { isMemoryRouter: true },
+      );
 
       const checkElementSpanish = screen.getByRole(expectedTag, {
         name: expectedText,
@@ -105,12 +126,19 @@ describe("Given the component Form", () => {
       const actionOnSubmit = vitest.fn();
 
       customRender(
-        <GameForm
-          title="New"
-          buttonText="Add"
-          actionOnSubmit={actionOnSubmit}
-          initialGame={initialGame}
-        />,
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <GameForm
+                title="New"
+                buttonText="Add"
+                actionOnSubmit={actionOnSubmit}
+                initialGame={initialGame}
+              />
+            }
+          />
+        </Routes>,
         {
           isMemoryRouter: true,
           isProvider: true,

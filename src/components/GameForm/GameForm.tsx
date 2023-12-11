@@ -13,7 +13,7 @@ import {
 import GameFormStyled from "./GameFormStyled";
 import Button from "../Button/Button";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 
 const gameCheckedButtonOptions = (
   titleOfInputs: string,
@@ -107,6 +107,8 @@ const GameForm = ({
   const [newGame, setNewGame] = useState(initialGame);
   const [disable, setDisable] = useState(true);
   const [isRedirec, setIsRedirec] = useState(false);
+  const [urlParams] = useSearchParams();
+  const page = Number(urlParams.get("page")) || 0;
 
   useEffect(() => {
     const { name, imageUrl, difficulty, gameTime, graphics, grind } = newGame;
@@ -249,7 +251,7 @@ const GameForm = ({
       <Button className="button--text" disable={disable}>
         {buttonText} Game
       </Button>
-      {isRedirec && <Navigate to="/home" />}
+      {isRedirec && <Navigate to={`/home?page=${page}`} />}
     </GameFormStyled>
   );
 };

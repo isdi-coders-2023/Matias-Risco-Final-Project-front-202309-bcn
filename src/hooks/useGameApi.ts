@@ -131,7 +131,7 @@ const useGameApi = () => {
 
       return numberGames;
     } catch {
-      throw new Error("Error game not found");
+      throw new Error("Error can't count number of games");
     }
   }, []);
 

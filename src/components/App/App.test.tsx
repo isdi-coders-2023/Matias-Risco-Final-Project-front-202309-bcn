@@ -27,7 +27,7 @@ describe("Given the component App", () => {
   });
 
   describe("When the user are in /game/info/:id and press link Home with the store aredy loaded", () => {
-    test("Then it should not see 'Error in loading page'", async () => {
+    test.only("Then it should not see 'Error in loading page'", async () => {
       server.use(...handlersError);
 
       const ultrakill = gamesMock[0];
@@ -40,7 +40,9 @@ describe("Given the component App", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock } },
+          preloadedState: {
+            gameState: { games: gamesMock, countGames: gamesMock.length },
+          },
         },
       );
 

@@ -15,7 +15,7 @@ const EditGamePage = (): React.ReactElement => {
   const [game, setGame] = useState(initialGame);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   const { loadingGameByIdParams } = usePageHooks();
-  const { editGame } = useGameApi();
+  const { editGameApi: editGame } = useGameApi();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
