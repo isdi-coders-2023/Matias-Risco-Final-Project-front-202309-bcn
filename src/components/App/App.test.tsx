@@ -27,7 +27,7 @@ describe("Given the component App", () => {
   });
 
   describe("When the user are in /game/info/:id and press link Home with the store aredy loaded", () => {
-    test.only("Then it should not see 'Error in loading page'", async () => {
+    test("Then it should not see 'Error in loading page'", async () => {
       server.use(...handlersError);
 
       const ultrakill = gamesMock[0];

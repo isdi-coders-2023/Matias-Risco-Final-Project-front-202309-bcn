@@ -41,7 +41,7 @@ describe("Given the component HomePage", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock } },
+          preloadedState: { gameState: { games: gamesMock, countGames: 0 } },
         },
       );
 
