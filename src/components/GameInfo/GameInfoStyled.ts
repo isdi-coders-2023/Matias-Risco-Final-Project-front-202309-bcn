@@ -40,7 +40,7 @@ const GameInfoStyled = styled.div`
       flex-wrap: wrap;
       gap: 10px;
       align-items: start;
-      font-size: ${({ theme }) => theme.typography.propetySize};
+      font-size: ${({ theme }) => theme.typography.propertySize};
     }
 
     &__button {
@@ -52,7 +52,7 @@ const GameInfoStyled = styled.div`
       align-items: center;
       text-decoration: none;
       color: ${({ theme }) => theme.color.backgroundNavigation};
-      font-size: ${({ theme }) => theme.typography.propetySize};
+      font-size: ${({ theme }) => theme.typography.propertySize};
       font-weight: inherit;
 
       &-container {

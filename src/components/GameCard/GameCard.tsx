@@ -12,12 +12,12 @@ interface GameCardParamsStructure {
   game: GameStructure;
 }
 
-const PropetiesToShortDescription = (propeties: string[]): string => {
-  const [firstTag, secondTag, ...restTags] = propeties;
+const propertiesToShortDescription = (properties: string[]): string => {
+  const [firstTag, secondTag, ...restTags] = properties;
 
-  return propeties.length > 2
+  return properties.length > 2
     ? `${firstTag}, ${secondTag}, ${restTags.length} more...`
-    : propeties.join(", ");
+    : properties.join(", ");
 };
 
 const GameCard = ({
@@ -49,7 +49,7 @@ const GameCard = ({
       <div className="game-card__description-container">
         <div className="game-card__description">
           <span>Plataforms: </span>
-          <span>{PropetiesToShortDescription(plataforms)}</span>
+          <span>{propertiesToShortDescription(plataforms)}</span>
         </div>
         <div className="game-card__description">
           <span>Difficulty: </span>
@@ -57,7 +57,7 @@ const GameCard = ({
         </div>
         <div className="game-card__description">
           <span>Languages: &nbsp;</span>
-          <span>{PropetiesToShortDescription(languages)}</span>
+          <span>{propertiesToShortDescription(languages)}</span>
         </div>
       </div>
       <div className="game-card__button-container">

@@ -22,7 +22,7 @@ const EditGamePage = (): React.ReactElement => {
     loadingGameByIdParams(idGame!, { games, setGame, setIsErrorLoading });
   }, [games, idGame, loadingGameByIdParams]);
 
-  const onSumbit = useCallback(
+  const onSubmit = useCallback(
     async (game: GameStructure) => {
       const gameEdited = await editGame(game);
       dispatch(editGameActionCreator(gameEdited));
@@ -39,7 +39,7 @@ const EditGamePage = (): React.ReactElement => {
         <GameForm
           title="Edit"
           buttonText="Modify"
-          actionOnSubmit={onSumbit}
+          actionOnSubmit={onSubmit}
           initialGame={game}
         />
       )}

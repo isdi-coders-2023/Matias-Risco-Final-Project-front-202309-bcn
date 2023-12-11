@@ -11,7 +11,7 @@ const ButtonStyled = styled.button`
       gap: 6px;
       align-items: center;
       text-decoration: none;
-      font-size: ${({ theme }) => theme.typography.propetySize};
+      font-size: ${({ theme }) => theme.typography.propertySize};
       font-weight: inherit;
     }
 

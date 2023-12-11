@@ -10,7 +10,7 @@ const AddGamePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { addGameApi } = useGameApi();
 
-  const onSumbit = useCallback(
+  const onSubmit = useCallback(
     async (game: GameWithPartialIdStructure) => {
       delete game.id;
       const newGame = await addGameApi(game);
@@ -23,7 +23,7 @@ const AddGamePage = (): React.ReactElement => {
   return (
     <AddGamePageStyled>
       <h1>Add Game</h1>
-      <GameForm title="New" buttonText="Add" actionOnSubmit={onSumbit} />
+      <GameForm title="New" buttonText="Add" actionOnSubmit={onSubmit} />
     </AddGamePageStyled>
   );
 };

@@ -5,7 +5,7 @@ import UiSlice, {
 
 describe("Given the reducer of UiSlice", () => {
   describe("When the reducer recive the actualState and the action toggleLoadingActionCreator", () => {
-    test("then it should return a newState with the propety isLoading toggle", () => {
+    test("then it should return a newState with the property isLoading toggle", () => {
       const actualState = initialUiState;
       const expectValue = !actualState.isLoading;
       const actionToggle = toggleLoadingActionCreator();
