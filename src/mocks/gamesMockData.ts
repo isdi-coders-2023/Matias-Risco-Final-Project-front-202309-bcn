@@ -1,5 +1,31 @@
 import { GameStructure } from "../store/feature/games/types";
 
+const addGames = (name: string, id: string, num: number) => {
+  const newGames: GameStructure[] = [];
+  for (let index = 1; index < num + 1; index++) {
+    let hexStr = (parseInt(id.slice(-6), 16) + Number(index)).toString(16);
+    while (hexStr.length < 6) {
+      hexStr = "0" + hexStr;
+    }
+
+    newGames.push({
+      audience: ["Adults", "Grandma"],
+      difficulty: "Easy",
+      gameTime: "To infinity and beyond",
+      graphics: "Decent",
+      grind: "You'll need a second life",
+      id: `${id}${hexStr}`,
+      imageUrl:
+        "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
+      languages: ["Danish", "English", "Russian", "Spanish"],
+      name: `${name}${index}`,
+      platforms: ["Windows", "VR"],
+      tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
+    });
+  }
+  return newGames;
+};
+
 const gamesMock: GameStructure[] = [
   {
     audience: ["Adults", "Teens"],
@@ -28,146 +54,7 @@ const gamesMock: GameStructure[] = [
     platforms: ["Windows", "VR"],
     tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
   },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000000009",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000000099",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe1",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000000999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe2",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000009999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe3",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000099999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe4",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000000999999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe5",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000009999999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe6",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000099999999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe7",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000000999999999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe8",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
-  {
-    audience: ["Adults", "Grandma"],
-    difficulty: "Easy",
-    gameTime: "To infinity and beyond",
-    graphics: "Decent",
-    grind: "You'll need a second life",
-    id: "656ab3420000009999999999",
-    imageUrl:
-      "https://www.king.com/images/share/banners/candycrush.png?_v=kmoqjd",
-    languages: ["Danish", "English", "Russian", "Spanish"],
-    name: "Pepe9",
-    platforms: ["Windows", "VR"],
-    tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
-  },
+  ...addGames("pepe", "656ab3423eb96014d34e07de", 10),
 ];
 
 export default gamesMock;
