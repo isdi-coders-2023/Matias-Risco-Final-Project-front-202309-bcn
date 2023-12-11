@@ -17,6 +17,27 @@ const HomePageStyled = styled.main`
     padding: 6px 0;
     font-size: ${({ theme }) => theme.typography.titleSize};
   }
+
+  .game-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+
+    &__next,
+    &__previous {
+      text-decoration: none;
+      color: ${({ theme }) => theme.color.navigationFont};
+      background-color: ${({ theme }) => theme.color.backgroundNavigation};
+      padding: 5px 10px;
+      border-radius: 45px;
+    }
+
+    &__next {
+      margin-left: auto;
+    }
+  }
 `;
 
 export default HomePageStyled;

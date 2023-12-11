@@ -13,23 +13,33 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 const useGameApi = () => {
   const dispatch = useAppDispatch();
 
-  const getGamesApi = useCallback(async (): Promise<GameStructure[]> => {
-    dispatch(toggleLoadingActionCreator());
-
-    try {
-      const {
-        data: { games },
-      } = await axios.get<{ games: GameStructure[] }>("/games");
-
+  const getGamesApi = useCallback(
+    async (page: number = 0): Promise<GameStructure[]> => {
       dispatch(toggleLoadingActionCreator());
 
-      return games;
-    } catch (error) {
-      dispatch(toggleLoadingActionCreator());
+      try {
+        const {
+          data: { games },
+        } = await axios.get<
+          { page: number },
+          AxiosResponse<{ games: GameStructure[] }>
+        >("/games", {
+          params: {
+            page,
+          },
+        });
 
-      throw new Error((error as Error).message);
-    }
-  }, [dispatch]);
+        dispatch(toggleLoadingActionCreator());
+
+        return games;
+      } catch (error) {
+        dispatch(toggleLoadingActionCreator());
+
+        throw new Error((error as Error).message);
+      }
+    },
+    [dispatch],
+  );
 
   const deleteGameApi = useCallback(
     async (id: string): Promise<GameStructure> => {

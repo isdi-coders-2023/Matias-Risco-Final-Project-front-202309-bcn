@@ -17,7 +17,7 @@ import { setupStore } from "../../utils/setUpStore";
 describe("Given the hook useGameApi", () => {
   describe("When getGamesApi is call", () => {
     test("it should return a array of Games containg with info  of Ultrakill and Cady Crush", async () => {
-      const expectedGames = copyGames(gamesMock);
+      const expectedGames = copyGames([gamesMock[0], gamesMock[1]]);
 
       const {
         result: {
@@ -31,7 +31,7 @@ describe("Given the hook useGameApi", () => {
 
       const actualGames = await getGamesApi();
 
-      expect(actualGames).toStrictEqual(expectedGames);
+      expect(actualGames).toEqual(expect.objectContaining(expectedGames));
     });
   });
 

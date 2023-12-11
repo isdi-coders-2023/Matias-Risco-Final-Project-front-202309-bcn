@@ -4,14 +4,22 @@ import HomePage from "./HomePage";
 import gamesMock from "../../mocks/gamesMockData";
 import { server } from "../../mocks/main";
 import { handlersError } from "../../mocks/handlersError";
+import { Route, Routes } from "react-router-dom";
 
 describe("Given the component HomePage", () => {
   describe("When HomePage it is render", () => {
     test("the user should see the heading of HomePage is Games", () => {
       const expetedText = "Games";
       const tag = "heading";
+      const path = "/home?page=1";
 
-      customRender(<HomePage />, { isProvider: true, isMemoryRouter: true });
+      customRender(
+        <HomePage />,
+        { isProvider: true, isMemoryRouter: true },
+        {
+          initialPath: path,
+        },
+      );
 
       const headingElement = screen.getByRole(tag, { name: expetedText });
 
@@ -24,11 +32,17 @@ describe("Given the component HomePage", () => {
       const portal = gamesMock[0];
       const counterStrike = gamesMock[1];
       const headingTag = "heading";
+      const path = "/home?page=-1";
 
       customRender(
-        <HomePage />,
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+        </Routes>,
         { isProvider: true, isMemoryRouter: true },
-        { preloadedState: { gameState: { games: gamesMock } } },
+        {
+          initialPath: path,
+          preloadedState: { gameState: { games: gamesMock } },
+        },
       );
 
       const portalHeadingElement = screen.getByRole(headingTag, {

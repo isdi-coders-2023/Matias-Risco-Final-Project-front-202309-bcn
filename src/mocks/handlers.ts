@@ -8,8 +8,16 @@ import {
 const urlApi = import.meta.env.VITE_API_URL;
 
 export const handlers = [
-  http.get(`${urlApi}/games`, () => {
-    return HttpResponse.json({ games: mockGames });
+  http.get(`${urlApi}/games`, ({ request }) => {
+    const url = new URL(request.url);
+
+    const page = +url.searchParams.get("page")!;
+
+    const games = mockGames.filter(
+      (_game, pocition) => pocition >= page * 10 && pocition <= (page + 1) * 10,
+    );
+
+    return HttpResponse.json({ games });
   }),
 
   http.delete(`${urlApi}/games/delete/:idGame`, (req) => {
