@@ -128,4 +128,5 @@ export interface GameWithPartialIdStructure extends GameWithOutIdStructure {
 
 export interface GameStateStructure {
   games: GameStructure[];
+  countGames: number;
 }

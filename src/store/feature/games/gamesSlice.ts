@@ -8,6 +8,7 @@ import { copyGames } from "./utils";
 
 export const initialGamesState: GameStateStructure = {
   games: [],
+  countGames: 0,
 };
 
 const gamesSlice = createSlice({
@@ -60,6 +61,14 @@ const gamesSlice = createSlice({
         ]),
       };
     },
+
+    setGameCount: (
+      currentState: GameStateStructure,
+      action: PayloadAction<number>,
+    ) => ({
+      ...currentState,
+      countGames: action.payload,
+    }),
   },
 });
 
@@ -69,4 +78,5 @@ export const {
   deleteGame: deleteGameActionCreator,
   addGame: addGameActionCreator,
   editGame: editGameActionCreator,
+  setGameCount: setGameCountActionCreator,
 } = gamesSlice.actions;
