@@ -55,7 +55,7 @@ export const handlers = [
     `${urlApi}/games/edit`,
     async ({ request }) => {
       const { game } = await request.json();
-      const gameApi = mockGames.find((game) => game.id === game.id);
+      const gameApi = mockGames.find(({ id }) => id === game.id);
 
       if (gameApi === undefined) {
         return HttpResponse.error();
