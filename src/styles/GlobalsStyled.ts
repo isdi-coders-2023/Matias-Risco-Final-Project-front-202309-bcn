@@ -50,7 +50,7 @@ body{
   font-family: ${({ theme }) => theme.typography.mainFontFamily};
   color: ${({ theme }) => theme.color.mainFont};
   background-color: ${({ theme }) => theme.color.background};
-  font-size: ${({ theme }) => theme.typography.propetySize};
+  font-size: ${({ theme }) => theme.typography.propertySize};
   font-weight: 600;
 }
 `;

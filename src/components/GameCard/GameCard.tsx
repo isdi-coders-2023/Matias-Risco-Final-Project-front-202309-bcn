@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { GameStructure } from "../../store/feature/games/types";
 import GameCardStyled from "./GameCardStyled";
 import Button from "../Button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { deleteGameActionCreator } from "../../store/feature/games/gamesSlice";
 import useGameApi from "../../hooks/useGameApi";
@@ -12,12 +12,12 @@ interface GameCardParamsStructure {
   game: GameStructure;
 }
 
-const PropetiesToShortDescription = (propeties: string[]): string => {
-  const [firstTag, secondTag, ...restTags] = propeties;
+const propertiesToShortDescription = (properties: string[]): string => {
+  const [firstTag, secondTag, ...restTags] = properties;
 
-  return propeties.length > 2
+  return properties.length > 2
     ? `${firstTag}, ${secondTag}, ${restTags.length} more...`
-    : propeties.join(", ");
+    : properties.join(", ");
 };
 
 const GameCard = ({
@@ -25,6 +25,8 @@ const GameCard = ({
 }: GameCardParamsStructure): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { deleteGameApi } = useGameApi();
+  const [urlParams] = useSearchParams();
+  const page = Number(urlParams.get("page")) || 0;
 
   const deleteAction = useCallback(async () => {
     try {
@@ -49,7 +51,7 @@ const GameCard = ({
       <div className="game-card__description-container">
         <div className="game-card__description">
           <span>Plataforms: </span>
-          <span>{PropetiesToShortDescription(plataforms)}</span>
+          <span>{propertiesToShortDescription(plataforms)}</span>
         </div>
         <div className="game-card__description">
           <span>Difficulty: </span>
@@ -57,7 +59,7 @@ const GameCard = ({
         </div>
         <div className="game-card__description">
           <span>Languages: &nbsp;</span>
-          <span>{PropetiesToShortDescription(languages)}</span>
+          <span>{propertiesToShortDescription(languages)}</span>
         </div>
       </div>
       <div className="game-card__button-container">
@@ -70,7 +72,10 @@ const GameCard = ({
           />
           Info
         </NavLink>
-        <NavLink to={`/game/edit/${id}`} className="game-card__button">
+        <NavLink
+          to={`/game/edit/${id}?page=${page}`}
+          className="game-card__button"
+        >
           <img
             src="/images/icon-edit.svg"
             alt="button"

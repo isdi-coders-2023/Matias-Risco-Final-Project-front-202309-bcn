@@ -13,7 +13,7 @@ import {
 import GameFormStyled from "./GameFormStyled";
 import Button from "../Button/Button";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 
 const gameCheckedButtonOptions = (
   titleOfInputs: string,
@@ -54,17 +54,17 @@ const gameInputSelect = (
   titleOfInput: string,
   possibleInput: readonly string[],
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-  propetyName: keyof GameStructure,
+  propertyName: keyof GameStructure,
   initialGame: GameStructure,
 ): React.ReactElement => (
   <div className="game-form__input">
-    <label htmlFor={propetyName}>{titleOfInput}: </label>
+    <label htmlFor={propertyName}>{titleOfInput}: </label>
     <select
-      name={propetyName}
-      id={propetyName}
+      name={propertyName}
+      id={propertyName}
       className="input-select"
       onChange={onChange}
-      defaultValue={initialGame[propetyName]}
+      defaultValue={initialGame[propertyName]}
       required
     >
       <option key="DEFAULT" value="DEFAULT" disabled>
@@ -107,6 +107,8 @@ const GameForm = ({
   const [newGame, setNewGame] = useState(initialGame);
   const [disable, setDisable] = useState(true);
   const [isRedirec, setIsRedirec] = useState(false);
+  const [urlParams] = useSearchParams();
+  const page = Number(urlParams.get("page")) || 0;
 
   useEffect(() => {
     const { name, imageUrl, difficulty, gameTime, graphics, grind } = newGame;
@@ -125,27 +127,27 @@ const GameForm = ({
   const onChangeInputsCheckBox = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const propety = event.target.value as
+    const property = event.target.value as
       | "platforms"
       | "languages"
       | "audience"
       | "tags";
 
-    const details = newGame[propety];
-    const propetyType = event.target.name as never;
+    const details = newGame[property];
+    const propertyType = event.target.name as never;
 
-    const index = details.indexOf(propetyType);
+    const index = details.indexOf(propertyType);
     let newDetails: string[];
 
     if (index === -1) {
-      newDetails = [...details, propetyType];
+      newDetails = [...details, propertyType];
     } else {
       [details[index], ...newDetails] = details;
     }
 
     setNewGame((newGame) => ({
       ...newGame,
-      [propety]: newDetails,
+      [property]: newDetails,
     }));
   };
 
@@ -158,7 +160,7 @@ const GameForm = ({
     }));
   };
 
-  const onSumbit = useCallback(
+  const onSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
@@ -181,7 +183,7 @@ const GameForm = ({
     <GameFormStyled
       className="game-form"
       autoComplete="off"
-      onSubmit={onSumbit}
+      onSubmit={onSubmit}
     >
       <h2>{title} Game</h2>
       <div className="game-form__input">
@@ -249,7 +251,7 @@ const GameForm = ({
       <Button className="button--text" disable={disable}>
         {buttonText} Game
       </Button>
-      {isRedirec && <Navigate to="/home" />}
+      {isRedirec && <Navigate to={`/home?page=${page}`} />}
     </GameFormStyled>
   );
 };

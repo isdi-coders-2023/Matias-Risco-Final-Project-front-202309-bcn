@@ -101,18 +101,16 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  const editGame = useCallback(
+  const editGameApi = useCallback(
     async (editedGame: GameWithPartialBodyStructure) => {
       dispatch(toggleLoadingActionCreator());
       try {
-        const { id } = editedGame;
-
         const {
           data: { game },
         } = await axios.patch<
           { game: GameWithPartialBodyStructure },
           AxiosResponse<{ game: GameStructure }>
-        >(`/games/edit/${id}`, { game: editedGame });
+        >(`/games/edit`, { game: editedGame });
 
         dispatch(toggleLoadingActionCreator());
         return game;
@@ -125,7 +123,26 @@ const useGameApi = () => {
     [dispatch],
   );
 
-  return { getGamesApi, deleteGameApi, addGameApi, infoGameApi, editGame };
+  const countGameApi = useCallback(async () => {
+    try {
+      const {
+        data: { numberGames },
+      } = await axios.get<{ numberGames: number }>("/games/count");
+
+      return numberGames;
+    } catch {
+      throw new Error("Error can't count number of games");
+    }
+  }, []);
+
+  return {
+    getGamesApi,
+    deleteGameApi,
+    addGameApi,
+    infoGameApi,
+    editGameApi,
+    countGameApi,
+  };
 };
 
 export default useGameApi;

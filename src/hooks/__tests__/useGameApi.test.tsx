@@ -115,7 +115,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = gamesMock[0];
       let testError: string = "";
       const expectedError = "Error game not found";
-      const testStore = setupStore({ gameState: { games: [] } });
+      const testStore = setupStore({ gameState: { games: [], countGames: 0 } });
 
       const {
         result: {
@@ -141,7 +141,7 @@ describe("Given the hook useGameApi", () => {
     test("it should return a Game containg with info  of Ultrakill", async () => {
       const ultrakill = gamesMock[0];
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock) },
+        gameState: { games: copyGames(gamesMock), countGames: 0 },
       });
 
       const {
@@ -165,7 +165,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock) },
+        gameState: { games: copyGames(gamesMock), countGames: 0 },
       });
 
       delete ultrakill.audience;
@@ -176,7 +176,7 @@ describe("Given the hook useGameApi", () => {
 
       const {
         result: {
-          current: { editGame },
+          current: { editGameApi },
         },
       } = renderHook(useGameApi, {
         wrapper: ({ children }: PropsWithChildren) => (
@@ -184,7 +184,7 @@ describe("Given the hook useGameApi", () => {
         ),
       });
 
-      const actualGame = await editGame(ultrakill);
+      const actualGame = await editGameApi(ultrakill);
 
       expect(actualGame).toEqual(expect.objectContaining(ultrakill));
     });
@@ -197,7 +197,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock) },
+        gameState: { games: copyGames(gamesMock), countGames: 0 },
       });
 
       delete ultrakill.audience;
@@ -208,7 +208,7 @@ describe("Given the hook useGameApi", () => {
 
       const {
         result: {
-          current: { editGame },
+          current: { editGameApi },
         },
       } = renderHook(useGameApi, {
         wrapper: ({ children }: PropsWithChildren) => (
@@ -218,7 +218,59 @@ describe("Given the hook useGameApi", () => {
       let actualError: Error = {} as Error;
 
       try {
-        await editGame(ultrakill);
+        await editGameApi(ultrakill);
+      } catch (error) {
+        actualError = error as Error;
+      }
+
+      expect(actualError).toEqual(
+        expect.objectContaining({ message: expectedError }),
+      );
+    });
+  });
+
+  describe("When countGameApi is call", () => {
+    test("then it should return", async () => {
+      const expectedNumber = gamesMock.length;
+
+      const {
+        result: {
+          current: { countGameApi },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      });
+
+      const number = await countGameApi();
+
+      expect(number).toEqual(expectedNumber);
+    });
+  });
+
+  describe("When countGameApi is call but there is a error", () => {
+    test("then it throw a error", async () => {
+      server.use(...handlersError);
+      const expectedError = "Error can't count number of games";
+
+      const {
+        result: {
+          current: { countGameApi },
+        },
+      } = renderHook(useGameApi, {
+        wrapper: ({ children }: PropsWithChildren) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      });
+      let actualError: Error = {} as Error;
+
+      try {
+        await countGameApi();
+
+        await new Promise((res) => {
+          setTimeout(res, 50);
+        });
       } catch (error) {
         actualError = error as Error;
       }

@@ -40,7 +40,9 @@ describe("Given the component App", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock } },
+          preloadedState: {
+            gameState: { games: gamesMock, countGames: gamesMock.length },
+          },
         },
       );
 

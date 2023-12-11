@@ -4,6 +4,7 @@ import {
   GameWithOutIdStructure,
   GameWithPartialBodyStructure,
 } from "../store/feature/games/types";
+import gamesMock from "./gamesMockData";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -51,11 +52,10 @@ export const handlers = [
   }),
 
   http.patch<PathParams, { game: GameWithPartialBodyStructure }>(
-    `${urlApi}/games/edit/:idGame`,
-    async ({ params, request }) => {
-      const { idGame } = params;
+    `${urlApi}/games/edit`,
+    async ({ request }) => {
       const { game } = await request.json();
-      const gameApi = mockGames.find((game) => game.id === idGame);
+      const gameApi = mockGames.find(({ id }) => id === game.id);
 
       if (gameApi === undefined) {
         return HttpResponse.error();
@@ -64,4 +64,8 @@ export const handlers = [
       }
     },
   ),
+
+  http.get(`${urlApi}/games/count`, () => {
+    return HttpResponse.json({ numberGames: gamesMock.length });
+  }),
 ];

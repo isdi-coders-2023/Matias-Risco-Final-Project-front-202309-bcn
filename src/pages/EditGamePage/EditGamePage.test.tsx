@@ -34,7 +34,7 @@ describe("Given the component EditGamePage", () => {
         </Routes>,
         { isMemoryRouter: true, isProvider: true },
         {
-          preloadedState: { gameState: { games: gamesMock } },
+          preloadedState: { gameState: { games: gamesMock, countGames: 0 } },
           initialPath: `/game/edit/${gamesMock[0].id}`,
         },
       );
@@ -60,7 +60,7 @@ describe("Given the component EditGamePage", () => {
         </Routes>,
         { isMemoryRouter: true, isProvider: true, isToastify: true },
         {
-          preloadedState: { gameState: { games: gamesMock } },
+          preloadedState: { gameState: { games: gamesMock, countGames: 0 } },
           initialPath: `/game/edit/${gamesMock[0].id}`,
         },
       );
