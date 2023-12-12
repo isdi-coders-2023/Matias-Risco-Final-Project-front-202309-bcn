@@ -8,7 +8,7 @@ import { copyGames } from "./utils";
 
 export const initialGamesState: GameStateStructure = {
   games: [],
-  countGames: 0,
+  page: 0,
 };
 
 const gamesSlice = createSlice({
@@ -38,36 +38,38 @@ const gamesSlice = createSlice({
       action: PayloadAction<GameStructure>,
     ) => ({
       ...currentState,
-      games: copyGames([...currentState.games, action.payload]),
+      games: copyGames([action.payload, ...currentState.games]),
     }),
 
     editGame: (
       currentState: GameStateStructure,
       action: PayloadAction<GameWithPartialBodyStructure>,
     ): GameStateStructure => {
-      const { games } = currentState;
+      const games = copyGames(currentState.games);
 
-      const index = currentState.games.findIndex(
-        ({ id }) => id === action.payload.id,
-      );
+      const index = currentState.games.findIndex(({ id }) => {
+        return id === action.payload.id;
+      });
+
       let stateGames: GameStructure[];
+
       [games[index], ...stateGames] = games;
+
+      const gameEdited: GameStructure = { ...games[index], ...action.payload };
 
       return {
         ...currentState,
-        games: copyGames([
-          ...stateGames,
-          { ...games[index], ...action.payload },
-        ]),
+
+        games: copyGames([gameEdited, ...stateGames]),
       };
     },
 
-    setGameCount: (
+    setGamePage: (
       currentState: GameStateStructure,
       action: PayloadAction<number>,
-    ) => ({
+    ): GameStateStructure => ({
       ...currentState,
-      countGames: action.payload,
+      page: action.payload,
     }),
   },
 });
@@ -78,5 +80,5 @@ export const {
   deleteGame: deleteGameActionCreator,
   addGame: addGameActionCreator,
   editGame: editGameActionCreator,
-  setGameCount: setGameCountActionCreator,
+  setGamePage: setGamePageActionCreator,
 } = gamesSlice.actions;

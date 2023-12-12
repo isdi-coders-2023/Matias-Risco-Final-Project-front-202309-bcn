@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
-import { loadGamesActionCreator } from "../../store/feature/games/gamesSlice";
+import {
+  loadGamesActionCreator,
+  setGamePageActionCreator,
+} from "../../store/feature/games/gamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";
@@ -12,14 +15,20 @@ const HomePage = (): React.ReactElement => {
   const [urlParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const { getGamesApi } = useGameApi();
-  const { games } = useAppSelector(({ gameState }) => gameState);
-  const page = Number(urlParams.get("page")) || 0;
+  const { games, page: pageGames } = useAppSelector(
+    ({ gameState }) => gameState,
+  );
+  const page = Math.floor(Math.abs(Number(urlParams.get("page")))) || 0;
 
   useEffect(() => {
     (async () => {
-      if (games.length >= 10 && page < 1) {
+      window.scroll(0, 0);
+      console.log(`page ${page}`);
+      console.log(`pageGames ${pageGames}`);
+      if (games.length > 0 && page === pageGames) {
         return;
       }
+      dispatch(setGamePageActionCreator(page));
 
       try {
         const gamesData = await getGamesApi(page);
@@ -27,9 +36,8 @@ const HomePage = (): React.ReactElement => {
       } catch (error) {
         await toast.error("Error in loading page");
       }
-      window.scroll(0, 0);
     })();
-  }, [dispatch, games.length, getGamesApi, page]);
+  }, [pageGames, dispatch, games.length, getGamesApi, page]);
 
   return (
     <HomePageStyled>
