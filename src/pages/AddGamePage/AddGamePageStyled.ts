@@ -8,7 +8,7 @@ const AddGamePageStyled = styled.main`
   padding: 15px 0 134px;
 
   h1 {
-    height: 50px;
+    height: 51px;
     width: 180px;
     background-color: ${({ theme }) => theme.color.containerBackground};
     color: ${({ theme }) => theme.color.secondaryFont};
