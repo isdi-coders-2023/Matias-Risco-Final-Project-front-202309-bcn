@@ -15,7 +15,7 @@ describe("Given the reducer of games", () => {
         gameTime: "Average",
         graphics: "Bad",
         grind: "Average grind level",
-        id: "656ab2e33eb96014d34e07dd",
+        id: gamesMock[1].id,
         imageUrl: "asdaf",
         languages: ["German", "Danish", "Dutch", "Finnish"],
         platforms: ["Linux"],

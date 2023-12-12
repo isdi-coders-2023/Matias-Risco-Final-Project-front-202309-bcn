@@ -17,7 +17,7 @@ import { setupStore } from "../../utils/setUpStore";
 describe("Given the hook useGameApi", () => {
   describe("When getGamesApi is call", () => {
     test("it should return a array of Games containg with info  of Ultrakill and Cady Crush", async () => {
-      const expectedGames = copyGames([gamesMock[0], gamesMock[1]]);
+      const expectedGames = copyGames([gamesMock[0], gamesMock[1]]).reverse();
 
       const {
         result: {
@@ -31,7 +31,7 @@ describe("Given the hook useGameApi", () => {
 
       const actualGames = await getGamesApi();
 
-      expect(actualGames).toEqual(expect.objectContaining(expectedGames));
+      expect(actualGames).toEqual(expect.arrayContaining(expectedGames));
     });
   });
 
@@ -115,7 +115,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = gamesMock[0];
       let testError: string = "";
       const expectedError = "Error game not found";
-      const testStore = setupStore({ gameState: { games: [], countGames: 0 } });
+      const testStore = setupStore({ gameState: { games: [], page: 0 } });
 
       const {
         result: {
@@ -141,7 +141,7 @@ describe("Given the hook useGameApi", () => {
     test("it should return a Game containg with info  of Ultrakill", async () => {
       const ultrakill = gamesMock[0];
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), countGames: 0 },
+        gameState: { games: copyGames(gamesMock), page: 0 },
       });
 
       const {
@@ -165,7 +165,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), countGames: 0 },
+        gameState: { games: copyGames(gamesMock), page: 0 },
       });
 
       delete ultrakill.audience;
@@ -197,7 +197,7 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), countGames: 0 },
+        gameState: { games: copyGames(gamesMock), page: 0 },
       });
 
       delete ultrakill.audience;

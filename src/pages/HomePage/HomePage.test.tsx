@@ -32,7 +32,7 @@ describe("Given the component HomePage", () => {
       const portal = gamesMock[0];
       const counterStrike = gamesMock[1];
       const headingTag = "heading";
-      const path = "/home?page=-1";
+      const path = "/home?page=0";
 
       customRender(
         <Routes>
@@ -41,7 +41,7 @@ describe("Given the component HomePage", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock, countGames: 0 } },
+          preloadedState: { gameState: { games: gamesMock, page: 0 } },
         },
       );
 

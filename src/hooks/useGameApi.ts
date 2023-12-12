@@ -31,7 +31,7 @@ const useGameApi = () => {
 
         dispatch(toggleLoadingActionCreator());
 
-        return games;
+        return games.reverse();
       } catch (error) {
         dispatch(toggleLoadingActionCreator());
 
@@ -110,7 +110,7 @@ const useGameApi = () => {
         } = await axios.patch<
           { game: GameWithPartialBodyStructure },
           AxiosResponse<{ game: GameStructure }>
-        >(`/games/edit`, { game: editedGame });
+        >("/games/edit", { game: editedGame });
 
         dispatch(toggleLoadingActionCreator());
         return game;

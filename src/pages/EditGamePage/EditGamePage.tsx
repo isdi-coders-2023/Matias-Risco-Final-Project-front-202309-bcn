@@ -15,7 +15,7 @@ const EditGamePage = (): React.ReactElement => {
   const [game, setGame] = useState(initialGame);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   const { loadingGameByIdParams } = usePageHooks();
-  const { editGameApi: editGame } = useGameApi();
+  const { editGameApi } = useGameApi();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,10 +24,10 @@ const EditGamePage = (): React.ReactElement => {
 
   const onSubmit = useCallback(
     async (game: GameStructure) => {
-      const gameEdited = await editGame(game);
+      const gameEdited = await editGameApi(game);
       dispatch(editGameActionCreator(gameEdited));
     },
-    [dispatch, editGame],
+    [dispatch, editGameApi],
   );
 
   const isGame: boolean = game.id?.length !== 0;
