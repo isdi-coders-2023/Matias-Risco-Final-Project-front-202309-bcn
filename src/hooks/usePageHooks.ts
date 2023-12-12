@@ -4,6 +4,7 @@ import useGameApi from "./useGameApi";
 import { toast } from "react-toastify";
 import { loadGamesActionCreator } from "../store/feature/games/gamesSlice";
 import { useAppDispatch } from "../store/hooks";
+import { copyGame } from "../store/feature/games/utils";
 
 interface DependenciesStructure {
   games: GameStructure[];
@@ -23,7 +24,7 @@ const usePageHooks = () => {
       let newGame = games.find(({ id }) => id === idGame);
 
       if (newGame) {
-        setGame(newGame);
+        setGame(copyGame(newGame));
         return;
       }
 
