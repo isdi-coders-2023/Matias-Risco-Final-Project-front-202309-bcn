@@ -8,7 +8,7 @@ const HomePageStyled = styled.main`
   padding: 15px 0 134px;
 
   h1 {
-    height: 50px;
+    height: 51px;
     width: 150px;
     background-color: ${({ theme }) => theme.color.containerBackground};
     color: ${({ theme }) => theme.color.secondaryFont};
@@ -24,6 +24,7 @@ const HomePageStyled = styled.main`
     justify-content: space-between;
     align-items: center;
     width: 250px;
+    height: 36px;
 
     &__next,
     &__previous {

@@ -9,7 +9,7 @@ const NotFoundPageStyled = styled.main`
 
   h1 {
     width: 150px;
-    height: 50px;
+    height: 51px;
     background-color: ${({ theme }) => theme.color.containerBackground};
     color: ${({ theme }) => theme.color.secondaryFont};
     text-align: center;
