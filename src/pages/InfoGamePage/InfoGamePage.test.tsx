@@ -16,7 +16,13 @@ describe("Given the component InfoGamePage", () => {
         </Routes>,
         { isMemoryRouter: true, isProvider: true },
         {
-          preloadedState: { gameState: { games: [], page: 0 } },
+          preloadedState: {
+            gameState: {
+              games: [],
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
           initialPath: `/game/info/${gamesMock[0].id}`,
         },
       );
@@ -40,7 +46,13 @@ describe("Given the component InfoGamePage", () => {
         </Routes>,
         { isMemoryRouter: true, isProvider: true },
         {
-          preloadedState: { gameState: { games: gamesMock, page: 0 } },
+          preloadedState: {
+            gameState: {
+              games: gamesMock,
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
           initialPath: `/game/info/${gamesMock[0].id}`,
         },
       );
@@ -64,7 +76,13 @@ describe("Given the component InfoGamePage", () => {
         </Routes>,
         { isMemoryRouter: true, isProvider: true, isToastify: true },
         {
-          preloadedState: { gameState: { games: gamesMock, page: 0 } },
+          preloadedState: {
+            gameState: {
+              games: gamesMock,
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
           initialPath: `/game/info/${id}`,
         },
       );

@@ -13,7 +13,15 @@ describe("Given the component GameCard", () => {
       customRender(
         <GamesList />,
         { isProvider: true, isMemoryRouter: true },
-        { preloadedState: { gameState: { games: gamesMock, page: 0 } } },
+        {
+          preloadedState: {
+            gameState: {
+              games: gamesMock,
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
+        },
       );
 
       const ultrakillHeadingElement = screen.getByRole(headingTag, {

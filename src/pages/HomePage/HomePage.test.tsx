@@ -11,7 +11,7 @@ describe("Given the component HomePage", () => {
     test("the user should see the heading of HomePage is Games", () => {
       const expetedText = "Games";
       const tag = "heading";
-      const path = "/home?page=1";
+      const path = "/home?page=2";
 
       customRender(
         <HomePage />,
@@ -41,7 +41,13 @@ describe("Given the component HomePage", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock, page: 0 } },
+          preloadedState: {
+            gameState: {
+              games: gamesMock,
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
         },
       );
 
