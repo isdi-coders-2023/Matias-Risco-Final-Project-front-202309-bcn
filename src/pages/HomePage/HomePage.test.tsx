@@ -18,6 +18,7 @@ describe("Given the component HomePage", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
+          preloadedState: { gameState: { games: [], maxPage: 4, page: 2 } },
         },
       );
 
@@ -32,7 +33,7 @@ describe("Given the component HomePage", () => {
       const portal = gamesMock[0];
       const counterStrike = gamesMock[1];
       const headingTag = "heading";
-      const path = "/home?page=0";
+      const path = "/home?page=1";
 
       customRender(
         <Routes>

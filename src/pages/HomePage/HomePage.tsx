@@ -17,13 +17,16 @@ const HomePage = (): React.ReactElement => {
   const { getGamesApi } = useGameApi();
   const { page: pageGames } = useAppSelector(({ gameState }) => gameState);
   const page = Math.floor(Math.abs(Number(urlParams.get("page")))) || 1;
+  const { maxPage } = useAppSelector(({ gameState }) => gameState);
+
   useEffect(() => {
     window.scroll(0, 0);
     if (page === pageGames) {
       return;
     }
-    dispatch(setGamePageActionCreator(page));
-  }, [dispatch, page, pageGames]);
+
+    dispatch(setGamePageActionCreator(page >= maxPage ? maxPage : page));
+  }, [dispatch, maxPage, page, pageGames]);
 
   useEffect(() => {
     (async () => {
@@ -53,12 +56,14 @@ const HomePage = (): React.ReactElement => {
             Previous
           </NavLink>
         )}
-        <NavLink
-          to={`/home?page=${page < 2 ? 2 : page + 1}`}
-          className="game-page__next"
-        >
-          Next
-        </NavLink>
+        {page < maxPage && (
+          <NavLink
+            to={`/home?page=${page < 2 ? 2 : page + 1}`}
+            className="game-page__next"
+          >
+            Next
+          </NavLink>
+        )}
       </div>
     </HomePageStyled>
   );

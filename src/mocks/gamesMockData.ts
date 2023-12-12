@@ -54,7 +54,7 @@ const gamesMock: GameStructure[] = [
     platforms: ["Windows", "VR"],
     tags: ["Free to Play", "Arcade", "Casual", "Colorful"],
   },
-  ...addGames("pepe", "656ab3423eb96014d34e07de", 10),
+  ...addGames("pepe", "656ab3423eb96014d34e07de", 20),
 ];
 
 export default gamesMock;
