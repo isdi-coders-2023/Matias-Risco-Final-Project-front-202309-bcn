@@ -41,7 +41,11 @@ describe("Given the component App", () => {
         {
           initialPath: path,
           preloadedState: {
-            gameState: { games: gamesMock, page: 0 },
+            gameState: {
+              games: gamesMock,
+              page: 1,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
           },
         },
       );

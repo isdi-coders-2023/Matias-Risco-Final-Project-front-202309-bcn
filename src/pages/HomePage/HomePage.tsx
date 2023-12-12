@@ -15,36 +15,40 @@ const HomePage = (): React.ReactElement => {
   const [urlParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const { getGamesApi } = useGameApi();
-  const { games, page: pageGames } = useAppSelector(
-    ({ gameState }) => gameState,
-  );
-  const page = Math.floor(Math.abs(Number(urlParams.get("page")))) || 0;
+  const { page: pageGames } = useAppSelector(({ gameState }) => gameState);
+  const page = Math.floor(Math.abs(Number(urlParams.get("page")))) || 1;
+  const { maxPage } = useAppSelector(({ gameState }) => gameState);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    if (page === pageGames) {
+      return;
+    }
+
+    dispatch(setGamePageActionCreator(page >= maxPage ? maxPage : page));
+  }, [dispatch, maxPage, page, pageGames]);
 
   useEffect(() => {
     (async () => {
-      window.scroll(0, 0);
-      console.log(`page ${page}`);
-      console.log(`pageGames ${pageGames}`);
-      if (games.length > 0 && page === pageGames) {
+      if (page === pageGames) {
         return;
       }
-      dispatch(setGamePageActionCreator(page));
 
       try {
-        const gamesData = await getGamesApi(page);
+        const gamesData = await getGamesApi(page - 1);
         dispatch(loadGamesActionCreator(gamesData));
       } catch (error) {
         await toast.error("Error in loading page");
       }
     })();
-  }, [pageGames, dispatch, games.length, getGamesApi, page]);
+  }, [dispatch, getGamesApi, page, pageGames]);
 
   return (
     <HomePageStyled>
       <h1>Games</h1>
       <GamesList />
       <div className="game-page">
-        {page > 0 && (
+        {page > 1 && (
           <NavLink
             to={`/home?page=${page - 1}`}
             className="game-page__previous"
@@ -52,12 +56,14 @@ const HomePage = (): React.ReactElement => {
             Previous
           </NavLink>
         )}
-        <NavLink
-          to={`/home?page=${page < 1 ? 1 : page + 1}`}
-          className="game-page__next"
-        >
-          Next
-        </NavLink>
+        {page < maxPage && (
+          <NavLink
+            to={`/home?page=${page < 2 ? 2 : page + 1}`}
+            className="game-page__next"
+          >
+            Next
+          </NavLink>
+        )}
       </div>
     </HomePageStyled>
   );

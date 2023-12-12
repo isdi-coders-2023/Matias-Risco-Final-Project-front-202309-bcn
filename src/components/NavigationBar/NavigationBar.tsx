@@ -1,25 +1,27 @@
 import { NavLink, useLocation } from "react-router-dom";
 import NavigationBarStyled from "./NavigationBarStyled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setGameMaxPageActionCreator } from "../../store/feature/games/gamesSlice";
 
 const NavigationBar = (): React.ReactElement => {
-  const [pageGames, setPageGames] = useState(0);
   const { pathname } = useLocation();
   const { countGameApi } = useGameApi();
+  const dispatch = useAppDispatch();
+  const { maxPage } = useAppSelector(({ gameState }) => gameState);
 
   useEffect(() => {
     (async () => {
       try {
         const totalGames = await countGameApi();
-
-        setPageGames(Math.floor(totalGames / 10));
+        dispatch(setGameMaxPageActionCreator(Math.floor(totalGames / 10) + 1));
       } catch {
         toast.error("Problems in counting number of games");
       }
     })();
-  }, [countGameApi, setPageGames]);
+  }, [countGameApi, dispatch]);
 
   return (
     <NavigationBarStyled>
@@ -61,7 +63,7 @@ const NavigationBar = (): React.ReactElement => {
             className={`button-icon ${
               pathname === "/game/add" ? "button-icon--active" : ""
             }`}
-            to={`/game/add?page=${pageGames}`}
+            to={`/game/add?page=${maxPage}`}
           >
             <img
               src="/images/icon-plus.svg"

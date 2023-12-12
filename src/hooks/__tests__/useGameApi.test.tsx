@@ -115,7 +115,13 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = gamesMock[0];
       let testError: string = "";
       const expectedError = "Error game not found";
-      const testStore = setupStore({ gameState: { games: [], page: 0 } });
+      const testStore = setupStore({
+        gameState: {
+          games: [],
+          page: 0,
+          maxPage: Math.floor(gamesMock.length / 10) + 1,
+        },
+      });
 
       const {
         result: {
@@ -141,7 +147,11 @@ describe("Given the hook useGameApi", () => {
     test("it should return a Game containg with info  of Ultrakill", async () => {
       const ultrakill = gamesMock[0];
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), page: 0 },
+        gameState: {
+          games: copyGames(gamesMock),
+          page: 0,
+          maxPage: Math.floor(gamesMock.length / 10) + 1,
+        },
       });
 
       const {
@@ -165,7 +175,11 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), page: 0 },
+        gameState: {
+          games: copyGames(gamesMock),
+          page: 0,
+          maxPage: Math.floor(gamesMock.length / 10) + 1,
+        },
       });
 
       delete ultrakill.audience;
@@ -197,7 +211,11 @@ describe("Given the hook useGameApi", () => {
       const ultrakill = copyGame(gamesMock[0]) as GameWithPartialBodyStructure;
 
       const testStore = setupStore({
-        gameState: { games: copyGames(gamesMock), page: 0 },
+        gameState: {
+          games: copyGames(gamesMock),
+          page: 0,
+          maxPage: Math.floor(gamesMock.length / 10) + 1,
+        },
       });
 
       delete ultrakill.audience;

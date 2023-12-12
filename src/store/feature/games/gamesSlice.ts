@@ -9,6 +9,7 @@ import { copyGames } from "./utils";
 export const initialGamesState: GameStateStructure = {
   games: [],
   page: 0,
+  maxPage: 0,
 };
 
 const gamesSlice = createSlice({
@@ -71,6 +72,14 @@ const gamesSlice = createSlice({
       ...currentState,
       page: action.payload,
     }),
+
+    setGameMaxPage: (
+      currentState: GameStateStructure,
+      action: PayloadAction<number>,
+    ): GameStateStructure => ({
+      ...currentState,
+      maxPage: action.payload,
+    }),
   },
 });
 
@@ -81,4 +90,5 @@ export const {
   addGame: addGameActionCreator,
   editGame: editGameActionCreator,
   setGamePage: setGamePageActionCreator,
+  setGameMaxPage: setGameMaxPageActionCreator,
 } = gamesSlice.actions;

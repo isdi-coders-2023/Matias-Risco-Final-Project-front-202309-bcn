@@ -11,13 +11,14 @@ describe("Given the component HomePage", () => {
     test("the user should see the heading of HomePage is Games", () => {
       const expetedText = "Games";
       const tag = "heading";
-      const path = "/home?page=1";
+      const path = "/home?page=2";
 
       customRender(
         <HomePage />,
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
+          preloadedState: { gameState: { games: [], maxPage: 4, page: 2 } },
         },
       );
 
@@ -32,7 +33,7 @@ describe("Given the component HomePage", () => {
       const portal = gamesMock[0];
       const counterStrike = gamesMock[1];
       const headingTag = "heading";
-      const path = "/home?page=0";
+      const path = "/home?page=1";
 
       customRender(
         <Routes>
@@ -41,7 +42,13 @@ describe("Given the component HomePage", () => {
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: gamesMock, page: 0 } },
+          preloadedState: {
+            gameState: {
+              games: gamesMock,
+              page: 0,
+              maxPage: Math.floor(gamesMock.length / 10) + 1,
+            },
+          },
         },
       );
 
