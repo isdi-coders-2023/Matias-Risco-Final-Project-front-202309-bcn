@@ -14,7 +14,7 @@ const NavigationBar = (): React.ReactElement => {
       try {
         const totalGames = await countGameApi();
 
-        setPageGames(Math.floor(totalGames / 10));
+        setPageGames(Math.floor(totalGames / 10) + 1);
       } catch {
         toast.error("Problems in counting number of games");
       }
