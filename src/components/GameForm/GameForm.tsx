@@ -67,7 +67,7 @@ const gameInputSelect = (
       defaultValue={initialGame[propertyName]}
       required
     >
-      <option key="DEFAULT" value="DEFAULT" disabled>
+      <option key="DEFAULT" value="" disabled>
         -- select an option --
       </option>
       {possibleInput.map((input) => (
@@ -92,10 +92,10 @@ const GameForm = ({
   actionOnSubmit,
   initialGame = {
     audience: [],
-    difficulty: "DEFAULT" as "Easy",
-    gameTime: "DEFAULT" as "Long",
-    graphics: "DEFAULT" as "Bad",
-    grind: "DEFAULT" as "Too much grind",
+    difficulty: "" as "Easy",
+    gameTime: "" as "Long",
+    graphics: "" as "Bad",
+    grind: "" as "Too much grind",
     imageUrl: "",
     languages: [],
     name: "",
@@ -116,10 +116,10 @@ const GameForm = ({
       !(
         name &&
         imageUrl &&
-        (difficulty as string) !== "DEFAULT" &&
-        (gameTime as string) !== "DEFAULT" &&
-        (graphics as string) !== "DEFAULT" &&
-        (grind as string) !== "DEFAULT"
+        (difficulty as string) !== "" &&
+        (gameTime as string) !== "" &&
+        (graphics as string) !== "" &&
+        (grind as string) !== ""
       ),
     );
   }, [newGame]);
