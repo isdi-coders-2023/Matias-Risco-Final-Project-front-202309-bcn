@@ -1,27 +1,25 @@
 import { NavLink, useLocation } from "react-router-dom";
 import NavigationBarStyled from "./NavigationBarStyled";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setGameCountActionCreator } from "../../store/feature/games/gamesSlice";
+import { useEffect, useState } from "react";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";
 
 const NavigationBar = (): React.ReactElement => {
+  const [pageGames, setPageGames] = useState(0);
   const { pathname } = useLocation();
-  const { countGames } = useAppSelector(({ gameState }) => gameState);
-  const dispatch = useAppDispatch();
   const { countGameApi } = useGameApi();
 
   useEffect(() => {
     (async () => {
       try {
         const totalGames = await countGameApi();
-        dispatch(setGameCountActionCreator(totalGames));
+
+        setPageGames(Math.floor(totalGames / 10));
       } catch {
         toast.error("Problems in counting number of games");
       }
     })();
-  }, [countGameApi, dispatch]);
+  }, [countGameApi, setPageGames]);
 
   return (
     <NavigationBarStyled>
@@ -63,7 +61,7 @@ const NavigationBar = (): React.ReactElement => {
             className={`button-icon ${
               pathname === "/game/add" ? "button-icon--active" : ""
             }`}
-            to={`/game/add?page=${Math.floor(countGames / 10)}`}
+            to={`/game/add?page=${pageGames}`}
           >
             <img
               src="/images/icon-plus.svg"
