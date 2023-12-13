@@ -16,8 +16,11 @@ const HomePage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getGamesApi } = useGameApi();
   const { page: pageGames } = useAppSelector(({ gameState }) => gameState);
-  const page = Math.floor(Math.abs(Number(urlParams.get("page")))) || 1;
   const { maxPage } = useAppSelector(({ gameState }) => gameState);
+  const page = Math.min(
+    Math.floor(Math.max(0, Number(urlParams.get("page")))) || 1,
+    maxPage,
+  );
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -25,7 +28,7 @@ const HomePage = (): React.ReactElement => {
       return;
     }
 
-    dispatch(setGamePageActionCreator(page >= maxPage ? maxPage : page));
+    dispatch(setGamePageActionCreator(page));
   }, [dispatch, maxPage, page, pageGames]);
 
   useEffect(() => {

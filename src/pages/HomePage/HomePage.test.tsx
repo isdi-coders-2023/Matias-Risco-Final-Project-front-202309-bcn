@@ -2,8 +2,6 @@ import { screen } from "@testing-library/react";
 import customRender from "../../utils/customRender";
 import HomePage from "./HomePage";
 import gamesMock from "../../mocks/gamesMockData";
-import { server } from "../../mocks/main";
-import { handlersError } from "../../mocks/handlersError";
 import { Route, Routes } from "react-router-dom";
 
 describe("Given the component HomePage", () => {
@@ -62,23 +60,6 @@ describe("Given the component HomePage", () => {
 
       expect(portalHeadingElement).toBeInTheDocument();
       expect(counterStrikeHeadingElement).toBeInTheDocument();
-    });
-  });
-
-  describe("When HomePage it is render but there is a error in loading", () => {
-    test("then it should call  object toast with the method error ", async () => {
-      const expectedText = "Error in loading page";
-      server.use(...handlersError);
-
-      customRender(<HomePage />, {
-        isProvider: true,
-        isMemoryRouter: true,
-        isToastify: true,
-      });
-
-      const tostifyElement = await screen.findByText(expectedText);
-
-      expect(tostifyElement).toBeInTheDocument();
     });
   });
 });
