@@ -5,6 +5,8 @@ import gamesMock from "../../mocks/gamesMockData";
 import userEvent from "@testing-library/user-event";
 import { server } from "../../mocks/main";
 import { handlersError } from "../../mocks/handlersError";
+import { handlers } from "../../mocks/handlers";
+import { HttpHandler } from "msw";
 
 describe("Given the component App", () => {
   describe("When it is render", () => {
@@ -59,6 +61,30 @@ describe("Given the component App", () => {
       const toastText = await screen.queryByText("Error in loading page");
 
       expect(toastText).not.toBeInTheDocument();
+    });
+  });
+
+  describe("When App it is render but there is a error in loading", () => {
+    test.only("then it should call  object toast with the method error ", async () => {
+      const expectedText = "Error in loading page";
+      let handlersInUse: HttpHandler[];
+      [handlers[0], ...handlersInUse] = handlers;
+      handlersInUse.push(handlersError[0]);
+
+      server.use(...handlersInUse);
+
+      customRender(
+        <App />,
+        {
+          isProvider: true,
+          isMemoryRouter: true,
+        },
+        { initialPath: "/home?page=0" },
+      );
+
+      const tostifyElement = await screen.findByText(expectedText);
+
+      expect(tostifyElement).toBeInTheDocument();
     });
   });
 });
