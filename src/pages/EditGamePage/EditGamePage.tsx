@@ -5,7 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import GameForm from "../../components/GameForm/GameForm";
 import usePageHooks from "../../hooks/usePageHooks";
 import EditGamePageStyled from "./EditGamePageStyled";
-import { initialGame } from "../../store/feature/games/utils";
+import {
+  copyGame,
+  deleteUnchangePropetiesGame,
+  initialGame,
+} from "../../store/feature/games/utils";
 import { editGameActionCreator } from "../../store/feature/games/gamesSlice";
 import useGameApi from "../../hooks/useGameApi";
 
@@ -23,11 +27,15 @@ const EditGamePage = (): React.ReactElement => {
   }, [games, idGame, loadingGameByIdParams]);
 
   const onSubmit = useCallback(
-    async (game: GameStructure) => {
-      const gameEdited = await editGameApi(game);
+    async (formGame: GameStructure) => {
+      const gameOnlyChange = deleteUnchangePropetiesGame(
+        game,
+        copyGame(formGame),
+      );
+      const gameEdited = await editGameApi(gameOnlyChange);
       dispatch(editGameActionCreator(gameEdited));
     },
-    [dispatch, editGameApi],
+    [dispatch, editGameApi, game],
   );
 
   const isGame: boolean = game.id?.length !== 0;
