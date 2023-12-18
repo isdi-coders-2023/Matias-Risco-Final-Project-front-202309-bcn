@@ -2,8 +2,8 @@ import React, { useCallback } from "react";
 import { GameStructure } from "../../store/feature/games/types";
 import GameCardStyled from "./GameCardStyled";
 import Button from "../Button/Button";
-import { NavLink, useSearchParams } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
+import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { deleteGameActionCreator } from "../../store/feature/games/gamesSlice";
 import useGameApi from "../../hooks/useGameApi";
 import { toast } from "react-toastify";
@@ -25,8 +25,7 @@ const GameCard = ({
 }: GameCardParamsStructure): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { deleteGameApi } = useGameApi();
-  const [urlParams] = useSearchParams();
-  const page = Number(urlParams.get("page")) || 0;
+  const { page } = useAppSelector(({ gameState }) => gameState);
 
   const deleteAction = useCallback(async () => {
     try {

@@ -1,8 +1,6 @@
 import { screen } from "@testing-library/react";
 import customRender from "../../utils/customRender";
 import NavigationBar from "./NavigationBar";
-import { server } from "../../mocks/main";
-import { handlersError } from "../../mocks/handlersError";
 
 describe("Given the component NavigationBar", () => {
   describe("When it is render", () => {
@@ -54,23 +52,6 @@ describe("Given the component NavigationBar", () => {
       });
 
       expect(addButtonElement).toBeInTheDocument();
-    });
-  });
-
-  describe("When it is render but there is a error with the api", () => {
-    test("Then it should display 'Problems in counting number of games'", async () => {
-      server.use(...handlersError);
-      const toastText = "Problems in counting number of games";
-
-      customRender(
-        <NavigationBar />,
-        { isMemoryRouter: true, isProvider: true, isToastify: true },
-        { initialPath: "/" },
-      );
-
-      const toastTextElement = await screen.findByText(toastText);
-
-      expect(toastTextElement).toBeInTheDocument();
     });
   });
 });

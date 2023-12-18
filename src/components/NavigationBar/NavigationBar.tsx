@@ -1,27 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
 import NavigationBarStyled from "./NavigationBarStyled";
-import { useEffect } from "react";
-import useGameApi from "../../hooks/useGameApi";
-import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setGameMaxPageActionCreator } from "../../store/feature/games/gamesSlice";
+import { useAppSelector } from "../../store/hooks";
 
 const NavigationBar = (): React.ReactElement => {
   const { pathname } = useLocation();
-  const { countGameApi } = useGameApi();
-  const dispatch = useAppDispatch();
   const { maxPage } = useAppSelector(({ gameState }) => gameState);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const totalGames = await countGameApi();
-        dispatch(setGameMaxPageActionCreator(Math.floor(totalGames / 10) + 1));
-      } catch {
-        toast.error("Problems in counting number of games");
-      }
-    })();
-  }, [countGameApi, dispatch]);
 
   return (
     <NavigationBarStyled>

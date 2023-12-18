@@ -3,20 +3,22 @@ import customRender from "../../utils/customRender";
 import HomePage from "./HomePage";
 import gamesMock from "../../mocks/gamesMockData";
 import { Route, Routes } from "react-router-dom";
+import { server } from "../../mocks/main";
+import { handlersError } from "../../mocks/handlersError";
 
 describe("Given the component HomePage", () => {
   describe("When HomePage it is render", () => {
     test("the user should see the heading of HomePage is Games", () => {
       const expetedText = "Games";
       const tag = "heading";
-      const path = "/home?page=2";
+      const path = "/home?page=200";
 
       customRender(
         <HomePage />,
         { isProvider: true, isMemoryRouter: true },
         {
           initialPath: path,
-          preloadedState: { gameState: { games: [], maxPage: 4, page: 2 } },
+          preloadedState: { gameState: { games: [], maxPage: 1, page: 0 } },
         },
       );
 
@@ -60,6 +62,44 @@ describe("Given the component HomePage", () => {
 
       expect(portalHeadingElement).toBeInTheDocument();
       expect(counterStrikeHeadingElement).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is render but there is a error with the api", () => {
+    test("Then it should display 'Problems in counting number of games'", async () => {
+      server.use(...handlersError);
+      const toastText = "Problems in counting number of games";
+
+      customRender(
+        <HomePage />,
+        { isMemoryRouter: true, isProvider: true, isToastify: true },
+        { initialPath: "/" },
+      );
+
+      const toastTextElement = await screen.findByText(toastText);
+
+      expect(toastTextElement).toBeInTheDocument();
+    });
+  });
+
+  describe("When HomePage it is render with maxPage=4 and page=3", () => {
+    test("the user should see the next button in homePage", () => {
+      const expetedText = "Next";
+      const tag = "link";
+      const path = "/home?page=3";
+
+      customRender(
+        <HomePage />,
+        { isProvider: true, isMemoryRouter: true },
+        {
+          initialPath: path,
+          preloadedState: { gameState: { games: [], maxPage: 4, page: 0 } },
+        },
+      );
+
+      const nextElement = screen.getByRole(tag, { name: expetedText });
+
+      expect(nextElement).toBeInTheDocument();
     });
   });
 });

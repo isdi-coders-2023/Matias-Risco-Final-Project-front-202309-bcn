@@ -124,21 +124,16 @@ const useGameApi = () => {
   );
 
   const countGameApi = useCallback(async () => {
-    dispatch(toggleLoadingActionCreator());
     try {
       const {
         data: { numberGames },
       } = await axios.get<{ numberGames: number }>("/games/count");
 
-      dispatch(toggleLoadingActionCreator());
-
       return numberGames;
     } catch {
-      dispatch(toggleLoadingActionCreator());
-
       throw new Error("Error can't count number of games");
     }
-  }, [dispatch]);
+  }, []);
 
   return {
     getGamesApi,
