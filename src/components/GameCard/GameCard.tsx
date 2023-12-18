@@ -46,6 +46,7 @@ const GameCard = ({
         alt={`game ${name}`}
         width="280"
         height="131"
+        loading="lazy"
       />
       <div className="game-card__description-container">
         <div className="game-card__description">
