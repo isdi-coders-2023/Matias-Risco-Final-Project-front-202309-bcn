@@ -16,7 +16,7 @@ const HomePage = (): React.ReactElement => {
   const [urlParams] = useSearchParams();
   const urlPage = Math.floor(Math.max(0, Number(urlParams.get("page")))) || 1;
   const [page, setPage] = useState(urlPage);
-  const [isCountLoading, setCountLoading] = useState(false);
+  const [isCountLoading, setIsCountLoading] = useState(false);
 
   const dispatch = useAppDispatch();
   const { getGamesApi, countGameApi } = useGameApi();
@@ -58,7 +58,7 @@ const HomePage = (): React.ReactElement => {
         const maxPage = Math.floor(totalGames / 10) + 1;
 
         dispatch(setGameMaxPageActionCreator(maxPage));
-        setCountLoading(true);
+        setIsCountLoading(true);
 
         if (page > maxPage) {
           setPage(maxPage);
