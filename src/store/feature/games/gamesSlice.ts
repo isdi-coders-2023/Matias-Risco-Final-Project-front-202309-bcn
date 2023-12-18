@@ -9,7 +9,7 @@ import { copyGames } from "./utils";
 export const initialGamesState: GameStateStructure = {
   games: [],
   page: 0,
-  maxPage: 0,
+  maxPage: 1,
 };
 
 const gamesSlice = createSlice({

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import HomePageStyled from "./HomePageStyled";
 import {
   loadGamesActionCreator,
+  setGameMaxPageActionCreator,
   setGamePageActionCreator,
 } from "../../store/feature/games/gamesSlice";
 import GamesList from "../../components/GamesList/GamesList";
@@ -13,38 +14,60 @@ import { NavLink, useSearchParams } from "react-router-dom";
 
 const HomePage = (): React.ReactElement => {
   const [urlParams] = useSearchParams();
+  const urlPage = Math.floor(Math.max(0, Number(urlParams.get("page")))) || 1;
+  const [page, setPage] = useState(urlPage);
+  const [isCountLoading, setCountLoading] = useState(false);
+
   const dispatch = useAppDispatch();
-  const { getGamesApi } = useGameApi();
+  const { getGamesApi, countGameApi } = useGameApi();
   const { page: pageGames } = useAppSelector(({ gameState }) => gameState);
   const { maxPage } = useAppSelector(({ gameState }) => gameState);
-  const page = Math.min(
-    Math.floor(Math.max(0, Number(urlParams.get("page")))) || 1,
-    maxPage,
-  );
 
   useEffect(() => {
-    window.scroll(0, 0);
-    if (page === pageGames) {
-      return;
-    }
-
-    dispatch(setGamePageActionCreator(page));
-  }, [dispatch, maxPage, page, pageGames]);
+    setPage(urlPage);
+  }, [urlPage]);
 
   useEffect(() => {
     (async () => {
       if (page === pageGames) {
         return;
       }
+      window.scroll(0, 0);
 
       try {
         const gamesData = await getGamesApi(page - 1);
-        dispatch(loadGamesActionCreator(gamesData));
+
+        if (gamesData.length) {
+          dispatch(setGamePageActionCreator(page));
+          dispatch(loadGamesActionCreator(gamesData));
+        }
       } catch (error) {
         await toast.error("Error in loading page");
       }
     })();
   }, [dispatch, getGamesApi, page, pageGames]);
+
+  useEffect(() => {
+    (async () => {
+      if (isCountLoading) {
+        return;
+      }
+
+      try {
+        const totalGames = await countGameApi();
+        const maxPage = Math.floor(totalGames / 10) + 1;
+
+        dispatch(setGameMaxPageActionCreator(maxPage));
+        setCountLoading(true);
+
+        if (page > maxPage) {
+          setPage(maxPage);
+        }
+      } catch {
+        toast.error("Problems in counting number of games");
+      }
+    })();
+  }, [countGameApi, dispatch, isCountLoading, page]);
 
   return (
     <HomePageStyled>
