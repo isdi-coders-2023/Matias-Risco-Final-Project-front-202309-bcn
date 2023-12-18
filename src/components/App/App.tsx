@@ -14,10 +14,10 @@ const LazyInfoGamePage = React.lazy(
   () => import("../../pages/InfoGamePage/InfoGamePage"),
 );
 const LazyEditGamePage = React.lazy(
-  () => import("../../pages/InfoGamePage/InfoGamePage"),
+  () => import("../../pages/EditGamePage/EditGamePage"),
 );
 const LazyNotFoundPage = React.lazy(
-  () => import("../../pages/InfoGamePage/InfoGamePage"),
+  () => import("../../pages/NotFoundPage/NotFoundPage"),
 );
 
 const App = (): React.ReactElement => {
