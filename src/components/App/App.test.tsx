@@ -10,7 +10,7 @@ import { HttpHandler } from "msw";
 
 describe("Given the component App", () => {
   describe("When it is render", () => {
-    test("Then it should display by screnn h1 'Games'", () => {
+    test("Then it should display by screnn h1 'Games'", async () => {
       const headingTag = "heading";
       const homeHeadingText = "Games";
 
@@ -20,7 +20,7 @@ describe("Given the component App", () => {
         { initialPath: "" },
       );
 
-      const headingElement = screen.getByRole(headingTag, {
+      const headingElement = await screen.findByRole(headingTag, {
         name: homeHeadingText,
       });
 
